@@ -11,9 +11,10 @@ class Weapon {
   private weapon;
 
   constructor(public prot:Protagonist) {
-    this.weapon = this.prot.mapState.add.weapon(1, 'icons_16x16');
+    this.weapon = this.prot.mapState.add.weapon(1, 'bullet_16x16');
     this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
     this.weapon.bulletSpeed = 400;
+    this.weapon.trackSprite(prot, 14, 0);
   }
 
   shoot()

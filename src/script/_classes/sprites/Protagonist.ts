@@ -11,7 +11,6 @@ import LeadingCamera = require("../lib/LeadingCamera");
 
 class Protagonist extends MapSprite {
   private _camera:LeadingCamera;
-
   private _ghostNr:number;
   private _velocity:Phaser.Point;
   private _maxVelocity:number;
@@ -22,7 +21,7 @@ class Protagonist extends MapSprite {
   constructor(mapState:GameState, object:any) {
     super(mapState, object);
     this.moveAnchor(.5);
-
+    
     // POSITION AND VELOCITY
     this._velocity = new Phaser.Point(0,0);
     this._maxVelocity = 25;
