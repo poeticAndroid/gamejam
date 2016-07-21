@@ -32,10 +32,12 @@ class Protagonist extends MapSprite {
     {
       this._ghostNr = object.ghostNr;
       console.log("Created ghost with ghostNr: " + this._ghostNr);
+      this.alpha = (this._ghostNr+2) / (this._recorder.getGhostAmount()+2);
     }
     else
     {
       this._ghostNr = null;
+      this.tint = 0x66ccff;
       joypad.start();
     }
 
