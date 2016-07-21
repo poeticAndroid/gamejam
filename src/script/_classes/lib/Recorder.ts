@@ -10,7 +10,7 @@ class Recorder{
   {
     this._ghostData = [];
     this._index = -1;
-    this._ghostAmount = -1;
+    this._ghostAmount = 0;
   }
 
   update()
@@ -20,18 +20,18 @@ class Recorder{
 
   resetIndex()
   {
-    this._index = 0;
+    this._index = -1;
   }
 
   addGhostRecord()
   {
-    this._ghostAmount++;
     this._ghostData[this._ghostAmount] = [];
+    this._ghostAmount++;
   }
 
   record(recordee:Protagonist)
   {
-    //this._ghostData[this._ghostAmount].push(recordee.getVelocity());
+    this._ghostData[this._ghostAmount - 1].push(recordee.getVelocity());
   }
 
   getGhostAmount()
@@ -46,7 +46,21 @@ class Recorder{
 
   printLatest()
   {
-    console.log(this._ghostData[0][this._index]);
+    console.log("Latest ghostrecord: " + this.getRecord(this._ghostAmount - 1) + "\nIndex: " + this._index);
+  }
+
+  printEntireRecord(ghostNr:number)
+  {
+    console.log("Printing entire record for ghostNr:" + ghostNr);
+    for (var i = 0; this._ghostData[i] !== undefined; i++) {
+      console.log(this._ghostData[i].toString());
+    }
+  }
+
+  print()
+  {
+    console.log("print");
+    console.log(this._ghostAmount + " " + this._index);
   }
 }
 export = Recorder;

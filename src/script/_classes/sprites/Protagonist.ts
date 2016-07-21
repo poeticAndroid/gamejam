@@ -6,6 +6,7 @@ import joypad    = require("../lib/joypad");
 import LeadingCamera = require("../lib/LeadingCamera");
 
 import Weapon = require("../sprites/Weapon");
+import Recorder = require("../lib/Recorder");
 
 /**
  * Protagonist class
@@ -15,6 +16,7 @@ class Protagonist extends MapSprite {
   private _camera:LeadingCamera;
   private _ghostNr:number;
   private _velocity:Phaser.Point;
+  private _recorder: Recorder;
 
   // stats
   private _maxVelocity:number;
@@ -24,16 +26,17 @@ class Protagonist extends MapSprite {
     super(mapState, object);
     this.moveAnchor(.5);
 
+    this._recorder = this.mapState.gameApp.recorder;
+
     // POSITION AND VELOCITY
     this._velocity = new Phaser.Point(0,0);
     this._maxVelocity = 25;
     this._weapon = 0;
 
-
-
     if(object.ghostNr !== undefined)
     {
       this._ghostNr = object.ghostNr;
+      console.log("Created ghost with ghostNr: " + this._ghostNr);
     }
     else
     {
@@ -46,7 +49,7 @@ class Protagonist extends MapSprite {
     this._velocity = new Phaser.Point(0,0);
 
     // stats
-    this._maxVelocity = 25;
+    this._maxVelocity = 10;
     this.maxHealth = 1;
     this.health = 1;
 
@@ -66,10 +69,10 @@ class Protagonist extends MapSprite {
     // Calculates velocity and moves the protagonist
     this.handleMovement();
     // Shoots continually
-     this._weapon.shoot();
+    this._weapon.shoot();
 
     // Records latest position
-    if(this._ghostNr == null) 
+    if(this._ghostNr === null) 
     {
       this.mapState.gameApp.recorder.record(this);
     }
@@ -77,12 +80,14 @@ class Protagonist extends MapSprite {
 
   calculateVelocity()
   {
-    if(this._ghostNr)
+    if(this._ghostNr >= 0 && this._ghostNr !== null)
     {
       // GHOST CONTROLLED
       // Get velocity
       this._velocity = this.mapState.gameApp.recorder.getRecord(this._ghostNr);
-      if(this._velocity == null)
+      //console.log(this._velocity)
+      //this.mapState.gameApp.recorder.print();
+      if(this._velocity === null)
       {
         this._velocity = new Phaser.Point(0,0);
       }
@@ -139,7 +144,7 @@ class Protagonist extends MapSprite {
 
   getVelocity()
   {
-    return this._velocity;
+    return new Phaser.Point(this._velocity.x, this._velocity.y);
   }
 
 

@@ -40,30 +40,6 @@
                  "width":32,
                  "x":960,
                  "y":223
-                }, 
-                {
-                 "gid":7,
-                 "height":64,
-                 "id":119,
-                 "name":"",
-                 "rotation":0,
-                 "type":"protagonist",
-                 "visible":true,
-                 "width":64,
-                 "x":400,
-                 "y":376
-                }, 
-                {
-                 "gid":9,
-                 "height":64,
-                 "id":120,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":368,
-                 "y":184
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -72,7 +48,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":121,
+ "nextobjectid":120,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
@@ -116,20 +92,6 @@
          "tilecount":1,
          "tileheight":16,
          "tilewidth":16,
-         "transparentcolor":"#ff00ff"
-        }, 
-        {
-         "columns":1,
-         "firstgid":9,
-         "image":"..\/gfx\/polarbear_64x64.png",
-         "imageheight":64,
-         "imagewidth":64,
-         "margin":0,
-         "name":"polarbear_64x64",
-         "spacing":0,
-         "tilecount":1,
-         "tileheight":64,
-         "tilewidth":64,
          "transparentcolor":"#ff00ff"
         }],
  "tilewidth":32,
