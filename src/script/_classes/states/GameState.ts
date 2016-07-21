@@ -42,8 +42,7 @@ class GameState extends MapState {
 
     this._timeInRoom++;
 
-    this.gameApp.recorder.printLatest();
-    this.gameApp.recorder.update();
+
   }
 
   command(command:string, args:any):boolean {
