@@ -18,18 +18,6 @@
          "name":"objects",
          "objects":[
                 {
-                 "gid":4,
-                 "height":32,
-                 "id":115,
-                 "name":"",
-                 "rotation":0,
-                 "type":"protagonist",
-                 "visible":true,
-                 "width":32,
-                 "x":303,
-                 "y":237
-                }, 
-                {
                  "gid":6,
                  "height":32,
                  "id":116,
@@ -52,6 +40,18 @@
                  "width":32,
                  "x":960,
                  "y":223
+                }, 
+                {
+                 "gid":7,
+                 "height":64,
+                 "id":119,
+                 "name":"",
+                 "rotation":0,
+                 "type":"protagonist",
+                 "visible":true,
+                 "width":64,
+                 "x":400,
+                 "y":376
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -60,7 +60,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":118,
+ "nextobjectid":120,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
@@ -77,6 +77,34 @@
          "tilecount":6,
          "tileheight":32,
          "tilewidth":32
+        }, 
+        {
+         "columns":1,
+         "firstgid":7,
+         "image":"..\/gfx\/spaceship_64x64.png",
+         "imageheight":64,
+         "imagewidth":64,
+         "margin":0,
+         "name":"spaceship_64x64",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":64,
+         "tilewidth":64,
+         "transparentcolor":"#ff00ff"
+        }, 
+        {
+         "columns":1,
+         "firstgid":8,
+         "image":"..\/gfx\/bullet_16x16.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "margin":0,
+         "name":"bullet_16x16",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":16,
+         "tilewidth":16,
+         "transparentcolor":"#ff00ff"
         }],
  "tilewidth":32,
  "version":1,
