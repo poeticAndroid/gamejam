@@ -8,7 +8,7 @@ import Protagonist = require("./Protagonist");
 
 class Weapon {
 
-  private weapon;
+  private weapon:Phaser.Weapon;
 
   constructor(public prot:Protagonist) {
     this.weapon = this.prot.mapState.add.weapon(1, 'bullet_16x16');
@@ -19,7 +19,7 @@ class Weapon {
 
   shoot()
   {
-    this.weapon.fire();
+    this.weapon.fire(this.prot);
   }
 }
 export = Weapon;

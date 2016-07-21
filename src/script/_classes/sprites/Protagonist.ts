@@ -5,6 +5,8 @@ import MapSprite = require("../lib/MapSprite");
 import joypad    = require("../lib/joypad");
 import LeadingCamera = require("../lib/LeadingCamera");
 
+import Weapon = require("../sprites/Weapon");
+
 /**
  * Protagonist class
  */
@@ -21,17 +23,12 @@ class Protagonist extends MapSprite {
   constructor(mapState:GameState, object:any) {
     super(mapState, object);
     this.moveAnchor(.5);
-<<<<<<< HEAD
 
-    // Player controlled or not?
-=======
-    
     // POSITION AND VELOCITY
     this._velocity = new Phaser.Point(0,0);
     this._maxVelocity = 25;
     this._weapon = 0;
 
->>>>>>> 25569b52d988676848e2af06cafe909196c39b82
     if(object.ghostNr !== undefined)
     {
       this._ghostNr = object.ghostNr;
@@ -53,16 +50,15 @@ class Protagonist extends MapSprite {
 
     this.mapState.gameApp.recorder.addGhostRecord();
 
-/*
     if(object.weapon instanceof Weapon)
     {
       this._weapon = object.weapon;
     }
     else
-    {                      // *************************** //
-      this._weapon = null; // INSERT STANDARD WEAPON HERE //
-    }                      // *************************** //
-*/
+    {                      
+      this._weapon = new Weapon(this);
+    }                     
+
 
   }
 
@@ -71,7 +67,7 @@ class Protagonist extends MapSprite {
     // Calculates velocity and moves the protagonist
     this.handleMovement();
     // Shoots continually
-    // this._weapon.shoot();
+     this._weapon.shoot();
 
     // Records latest position
     if(this._ghostNr == null) 
