@@ -17,6 +17,7 @@ class Weapon {
     this.weapon.bulletSpeed = 400;
     this.weapon.trackSprite(prot, 14, 0);
     this.weapon.bulletAngleOffset = 90;
+    this.prot.mapState.objectType("bullet").add(this.weapon.bullets);
   }
 
   shoot()
