@@ -14,20 +14,16 @@ class Protagonist extends MapSprite {
 
   private _ghostNr:number;
   private _velocity:Phaser.Point;
+
+  // stats
   private _maxVelocity:number;
   private _weapon:any;
-  // this.position
-  // this.
 
   constructor(mapState:GameState, object:any) {
     super(mapState, object);
     this.moveAnchor(.5);
 
-    // POSITION AND VELOCITY
-    this._velocity = new Phaser.Point(0,0);
-    this._maxVelocity = 25;
-    this._weapon = 0;
-
+    // Player controlled or not?
     if(object.ghostNr !== undefined)
     {
       this._ghostNr = object.ghostNr;
@@ -35,9 +31,31 @@ class Protagonist extends MapSprite {
     else
     {
       this._ghostNr = null;
+      joypad.start();
     }
 
-    joypad.start();
+    // POSITION AND VELOCITY
+    this.position = object.position ? object.position : new Phaser.Point(0,0);
+    this._velocity = new Phaser.Point(0,0);
+
+    // stats
+    this._maxVelocity = 25;
+    this.maxHealth = 1;
+    this.health = 1;
+
+    this.mapState.gameApp.recorder.addGhostRecord();
+
+/*
+    if(object.weapon instanceof Weapon)
+    {
+      this._weapon = object.weapon;
+    }
+    else
+    {                      // *************************** //
+      this._weapon = null; // INSERT STANDARD WEAPON HERE //
+    }                      // *************************** //
+*/
+
   }
 
   update() 
@@ -45,7 +63,8 @@ class Protagonist extends MapSprite {
     // Calculates velocity and moves the protagonist
     this.handleMovement();
     // Shoots continually
-    this._weapon.shoot();
+    // this._weapon.shoot();
+    this.record();
   }
 
   calculateVelocity()
@@ -53,7 +72,8 @@ class Protagonist extends MapSprite {
     if(this._ghostNr)
     {
       // GHOST CONTROLLED
-      // Get velocity here
+      // Get velocity
+      this._velocity = this.mapState.gameApp.recorder.getRecord(this._ghostNr);
     }
     else
     {
@@ -104,5 +124,16 @@ class Protagonist extends MapSprite {
     Phaser.Point.add(this.position, this._velocity, this.position);
     this.checkCameraBounds();
   }
+
+  getVelocity()
+  {
+    return this._velocity;
+  }
+
+  record()
+  {
+    this.mapState.gameApp.recorder.record(this, 0);
+  }
+
 }
 export = Protagonist;

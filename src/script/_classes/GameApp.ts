@@ -4,11 +4,16 @@ import BaseGameApp  = require("./lib/BaseGameApp");
 import MapState = require("./lib/MapState");
 import GameState = require("./states/GameState");
 
+import Recorder = require("./lib/Recorder");
+
 /**
  * GameApp class
  */
 
 class GameApp extends BaseGameApp {
+
+  public recorder: Recorder;
+
   constructor(containerId: string, fullScreen?: boolean) {
     super(containerId, 960, 540, fullScreen);
     var maps = [ "start", "settings" ];
@@ -20,6 +25,8 @@ class GameApp extends BaseGameApp {
       this.eng.state.add(maps[i] + "_room", new GameState(this, maps[i] + "_map", "assets/maps/" + maps[i] + ".json"));
     }
     this.saveFile.set("room", "mountain_room", true);
+
+    this.recorder = new Recorder();
   }
 
   goTo(state: string) {

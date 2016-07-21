@@ -7,16 +7,19 @@ import MapSprite     = require("../lib/MapSprite");
 import Protagonist   = require("../sprites/Protagonist");
 import Text          = require("../sprites/Text");
 
+import Recorder     = require("../lib/Recorder");
 /**
  * GameState class
  */
 class GameState extends MapState {
+
   constructor(gameApp:GameApp, mapName?:string, _url?:string) {
     super(gameApp, mapName, _url);
     this.eng.antialias = false;
     this.objectClasses["protagonist"] = Protagonist;
     this.objectClasses["text"] = Text;
     this.joypad.mode = "rc";
+
   }
 
   preload(showProgress=true) {
@@ -38,6 +41,9 @@ class GameState extends MapState {
     this.camera.x++;
 
     this._timeInRoom++;
+
+    this.gameApp.recorder.printLatest();
+    this.gameApp.recorder.update();
   }
 
   command(command:string, args:any):boolean {
