@@ -29,6 +29,8 @@ class Protagonist extends MapSprite {
     this._maxVelocity = 25;
     this._weapon = 0;
 
+
+
     if(object.ghostNr !== undefined)
     {
       this._ghostNr = object.ghostNr;
@@ -48,8 +50,6 @@ class Protagonist extends MapSprite {
     this.maxHealth = 1;
     this.health = 1;
 
-    this.mapState.gameApp.recorder.addGhostRecord();
-
     if(object.weapon instanceof Weapon)
     {
       this._weapon = object.weapon;
@@ -58,7 +58,6 @@ class Protagonist extends MapSprite {
     {                      
       this._weapon = new Weapon(this);
     }                     
-
 
   }
 
@@ -83,6 +82,10 @@ class Protagonist extends MapSprite {
       // GHOST CONTROLLED
       // Get velocity
       this._velocity = this.mapState.gameApp.recorder.getRecord(this._ghostNr);
+      if(this._velocity == null)
+      {
+        this._velocity = new Phaser.Point(0,0);
+      }
     }
     else
     {

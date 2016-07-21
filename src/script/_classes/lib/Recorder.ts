@@ -31,7 +31,12 @@ class Recorder{
 
   record(recordee:Protagonist)
   {
-    this._ghostData[this._ghostAmount].push(recordee.getVelocity());
+    //this._ghostData[this._ghostAmount].push(recordee.getVelocity());
+  }
+
+  getGhostAmount()
+  {
+    return this._ghostAmount;
   }
 
   getRecord(ghostNr:number)
