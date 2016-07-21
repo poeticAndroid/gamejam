@@ -91,6 +91,20 @@
          "tileheight":64,
          "tilewidth":64,
          "transparentcolor":"#ff00ff"
+        }, 
+        {
+         "columns":1,
+         "firstgid":8,
+         "image":"..\/gfx\/bullet_16x16.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "margin":0,
+         "name":"bullet_16x16",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":16,
+         "tilewidth":16,
+         "transparentcolor":"#ff00ff"
         }],
  "tilewidth":32,
  "version":1,
