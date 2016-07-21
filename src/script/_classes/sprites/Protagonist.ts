@@ -25,13 +25,14 @@ class Protagonist extends MapSprite {
     super(mapState, object);
     this.moveAnchor(.5);
 
-    this._recorder = this.mapState.gameApp.recorder;
-
-
     if(object.ghostNr !== undefined)
     {
       this._ghostNr = object.ghostNr;
-      console.log("Created ghost with ghostNr: " + this._ghostNr);
+
+      // linear alpha drop from 0.9 to 0.1
+      this.alpha = 0.2 + ((this._ghostNr + 1) / this.mapState.gameApp.recorder.getGhostAmount() * 0.7);
+      this.tint = 0xA0A0FF;
+      //console.log("Created ghost with ghostNr: " + this._ghostNr);
     }
     else
     {
