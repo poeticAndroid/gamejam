@@ -1,0 +1,46 @@
+@page-width: 960px;
+
+@import "_reset";
+
+html {
+	background-color: #000;
+	color: #fff;
+}
+
+noscript, .noscript {
+  display: block;
+  background-color: #f90;
+  color: #420;
+  text-align: center;
+  padding: .2em;
+}
+
+article {
+	padding: 1em .8em;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.25em;
+}
+
+p {
+  margin: 0.8em 0;
+}
+
+.hidden {
+	display: none !important;
+}
+
+.page-width {
+  margin-top: 1em;
+
+  @media (max-height: 600px) {
+    margin-top: 0;
+  }
+}
+
+@import "./_fsPhaser";

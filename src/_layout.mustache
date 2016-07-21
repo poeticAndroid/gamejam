@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>{{title}}</title>
+    <meta property="og:url" content="{{baseUrl}}">
+    <meta property="og:title" content="{{siteName}}">
+    <meta property="og:description" content="{{description}}">
+    <meta property="og:type" content="game">
+    <meta property="og:image" content="{{baseUrl}}images/cover.png">
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+  </head>
+  <body>
+    <div class="page-width">{{{yield}}}</div>
+    {{>_piwik}}
+  </body>
+</html>
