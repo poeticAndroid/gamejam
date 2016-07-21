@@ -35,7 +35,7 @@ class Grunt extends MapSprite {
     }
 
     // POSITION AND VELOCITY
-    this.position = object.position ? object.position : new Phaser.Point(0,0);
+    this.position = object.x && object.y ? new Phaser.Point(object.x, object.y) : new Phaser.Point(0,0);
     this._velocity = new Phaser.Point(0,0);
 
     // stats
