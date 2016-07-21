@@ -15,7 +15,7 @@ class GameApp extends BaseGameApp {
     for (var i in maps) {
       this.eng.state.add(maps[i] + "_state", new GameState(this, maps[i] + "_map", "assets/maps/" + maps[i] + ".json"));
     }
-    maps = [ "mountain" ];
+    maps = [ "game" ];
     for (var i in maps) {
       this.eng.state.add(maps[i] + "_room", new GameState(this, maps[i] + "_map", "assets/maps/" + maps[i] + ".json"));
     }
