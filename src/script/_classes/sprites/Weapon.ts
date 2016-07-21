@@ -15,6 +15,7 @@ class Weapon {
     this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
     this.weapon.bulletSpeed = 400;
     this.weapon.trackSprite(prot, 14, 0);
+    this.weapon.bulletAngleOffset = 90;
   }
 
   shoot()
