@@ -29,9 +29,9 @@ class Recorder{
     this._ghostAmount++;
   }
 
-  record(recordee:Protagonist, ghostNr:number)
+  record(recordee:Protagonist)
   {
-    this._ghostData[ghostNr][this._index] = recordee.getVelocity();
+    this._ghostData[this._ghostAmount][this._index] = recordee.getVelocity();
   }
 
   getRecord(ghostNr:number)

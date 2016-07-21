@@ -64,7 +64,12 @@ class Protagonist extends MapSprite {
     this.handleMovement();
     // Shoots continually
     // this._weapon.shoot();
-    this.record();
+
+    // Records latest position
+    if(this._ghostNr == null) 
+    {
+      this.mapState.gameApp.recorder.record(this);
+    }
   }
 
   calculateVelocity()
@@ -130,10 +135,6 @@ class Protagonist extends MapSprite {
     return this._velocity;
   }
 
-  record()
-  {
-    this.mapState.gameApp.recorder.record(this, 0);
-  }
 
 }
 export = Protagonist;
