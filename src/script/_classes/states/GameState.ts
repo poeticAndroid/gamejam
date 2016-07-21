@@ -29,17 +29,14 @@ class GameState extends MapState {
   create() {
     super.create();
 
-    this.physics.startSystem(Phaser.Physics.ARCADE);
-    this.physics.arcade.gravity.y = 1024;
-
     this._timeInRoom = 0;
   }
 
   update() {
     super.update();
-    if (this.objectType("protagonist").getAt(0).grabbing) {
-      this.game.physics.arcade.collide(this.objectType("protagonist"), this.layers["tiles"]);
-    }
+
+    this.camera.x++;
+
     this._timeInRoom++;
   }
 

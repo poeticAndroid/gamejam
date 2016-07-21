@@ -12,20 +12,97 @@ import LeadingCamera = require("../lib/LeadingCamera");
 class Protagonist extends MapSprite {
   private _camera:LeadingCamera;
 
+  private _ghostNr:number;
+  private _velocity:Phaser.Point;
+  private _maxVelocity:number;
+  private _weapon:any;
+  // this.position
+  // this.
+
   constructor(mapState:GameState, object:any) {
     super(mapState, object);
     this.moveAnchor(.5);
 
-    this._camera = new LeadingCamera(this, 160, 0);
+    // POSITION AND VELOCITY
+    this._velocity = new Phaser.Point(0,0);
+    this._maxVelocity = 25;
+    this._weapon = 0;
+
+    if(object.ghostNr !== undefined)
+    {
+      this._ghostNr = object.ghostNr;
+    }
+    else
+    {
+      this._ghostNr = null;
+    }
 
     joypad.start();
   }
 
-  update() {
-
-    this._camera.update();
+  update() 
+  {
+    // Calculates velocity and moves the protagonist
+    this.handleMovement();
+    // Shoots continually
+    this._weapon.shoot();
   }
 
+  calculateVelocity()
+  {
+    if(this._ghostNr)
+    {
+      // GHOST CONTROLLED
+      // Get velocity here
+    }
+    else
+    {
+      // PLAYER CONTROLLED      
+      // Calculate velocity
+      this._velocity.set(joypad.x * this._maxVelocity, joypad.y * this._maxVelocity);
+    }
+  }
 
+  checkCameraBounds()
+  {
+      var XSize = this.mapState.camera.width;
+      var YSize = this.mapState.camera.height;
+      var x = this.position.x;
+      var y = this.position.y;
+      var camX = this.mapState.camera.x;
+      var camY = this.mapState.camera.y;
+
+      // Right side of camera
+      if(x > camX + XSize)
+      {
+        this.position.x = XSize + camX;
+      }
+      // Left side of camera
+      else if(x < camX)
+      {
+        this.position.x = camX;
+      }
+
+      // Top of camera
+      if(y > camY + YSize)
+      {
+        this.position.y = YSize + camY;
+      }
+      // Bottom side of camera
+      else if(y < camY)
+      {
+        this.position.y = camY;
+      }
+  }
+
+  handleMovement()
+  {
+    // Calculate velocity
+    this.calculateVelocity();
+
+    // Move protagonist
+    Phaser.Point.add(this.position, this._velocity, this.position);
+    this.checkCameraBounds();
+  }
 }
 export = Protagonist;
