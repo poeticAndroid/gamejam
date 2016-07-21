@@ -33,6 +33,7 @@ class GameState extends MapState {
 
   create() {
     super.create();
+    this.camera.y = this.world.height;
 
     this._timeInRoom = 0;
   }
@@ -40,7 +41,7 @@ class GameState extends MapState {
   update() {
     super.update();
 
-    this.camera.x++;
+    this.camera.y--;
 
     this._timeInRoom++;
 
