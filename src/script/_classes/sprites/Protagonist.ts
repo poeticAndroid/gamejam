@@ -4,7 +4,6 @@ import GameState  = require("../states/GameState");
 import MapSprite = require("../lib/MapSprite");
 import joypad    = require("../lib/joypad");
 import LeadingCamera = require("../lib/LeadingCamera");
-
 import Weapon = require("../sprites/Weapon");
 
 /**
