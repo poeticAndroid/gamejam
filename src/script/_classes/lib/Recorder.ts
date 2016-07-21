@@ -29,9 +29,9 @@ class Recorder{
     this._ghostAmount++;
   }
 
-  record(recordee:Protagonist)
+  record(recordee:Phaser.Sprite)
   {
-    this._ghostData[this._ghostAmount - 1].push(recordee.getVelocity());
+    this._ghostData[this._ghostAmount - 1].push(new Phaser.Point(recordee.body.velocity.x, recordee.body.velocity.y));
   }
 
   getGhostAmount()

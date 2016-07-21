@@ -4,7 +4,6 @@ import GameState  = require("../states/GameState");
 import MapSprite = require("../lib/MapSprite");
 import joypad    = require("../lib/joypad");
 import LeadingCamera = require("../lib/LeadingCamera");
-
 import Weapon = require("../sprites/Weapon");
 import Recorder = require("../lib/Recorder");
 
@@ -28,10 +27,6 @@ class Protagonist extends MapSprite {
 
     this._recorder = this.mapState.gameApp.recorder;
 
-    // POSITION AND VELOCITY
-    this._velocity = new Phaser.Point(0,0);
-    this._maxVelocity = 25;
-    this._weapon = 0;
 
     if(object.ghostNr !== undefined)
     {
@@ -45,13 +40,14 @@ class Protagonist extends MapSprite {
     }
 
     // POSITION AND VELOCITY
-    this.position = object.position ? object.position : new Phaser.Point(0,0);
-    this._velocity = new Phaser.Point(0,0);
+    this.position = object.x && object.y ? new Phaser.Point(object.x, object.y) : new Phaser.Point(0,0);
 
     // stats
-    this._maxVelocity = 10;
+    this._maxVelocity = 300;
     this.maxHealth = 1;
     this.health = 1;
+
+    this._weapon = 0;
 
     if(object.weapon instanceof Weapon)
     {
@@ -84,19 +80,19 @@ class Protagonist extends MapSprite {
     {
       // GHOST CONTROLLED
       // Get velocity
-      this._velocity = this.mapState.gameApp.recorder.getRecord(this._ghostNr);
+      this.body.velocity = this.mapState.gameApp.recorder.getRecord(this._ghostNr);
       //console.log(this._velocity)
       //this.mapState.gameApp.recorder.print();
-      if(this._velocity === null)
+      if(this.body.velocity === null)
       {
-        this._velocity = new Phaser.Point(0,0);
+        this.body.velocity = new Phaser.Point(0,-60);
       }
     }
     else
     {
       // PLAYER CONTROLLED      
       // Calculate velocity
-      this._velocity.set(joypad.x * this._maxVelocity, joypad.y * this._maxVelocity);
+      this.body.velocity.set(joypad.x * this._maxVelocity, joypad.y * this._maxVelocity - 60);
     }
   }
 
@@ -138,13 +134,12 @@ class Protagonist extends MapSprite {
     this.calculateVelocity();
 
     // Move protagonist
-    Phaser.Point.add(this.position, this._velocity, this.position);
     this.checkCameraBounds();
   }
 
   getVelocity()
   {
-    return new Phaser.Point(this._velocity.x, this._velocity.y);
+    return new Phaser.Point(this.body.velocity.x, this.body.velocity.y);
   }
 
 

@@ -5,6 +5,7 @@ import MapState      = require("../lib/MapState");
 import MapSprite     = require("../lib/MapSprite");
 
 import Protagonist   = require("../sprites/Protagonist");
+import Grunt         = require("../sprites/Grunt");
 import Text          = require("../sprites/Text");
 
 import Recorder      = require("../lib/Recorder");
@@ -14,11 +15,13 @@ import Recorder      = require("../lib/Recorder");
  */
 class GameState extends MapState {
   public recorder : Recorder;
+  public advanceSpeed : number;
 
   constructor(gameApp:GameApp, mapName?:string, _url?:string) {
     super(gameApp, mapName, _url);
     this.eng.antialias = false;
     this.objectClasses["protagonist"] = Protagonist;
+    this.objectClasses["grunt"] = Grunt;
     this.objectClasses["text"] = Text;
     this.joypad.mode = "rpg";
     this.recorder = this.gameApp.recorder;
@@ -33,11 +36,18 @@ class GameState extends MapState {
 
   create() {
     super.create();
+    this.camera.y = this.world.height;
 
+    this.advanceSpeed = -60;
+
+    this.physics.startSystem(Phaser.Physics.ARCADE);
+
+
+    // Set recorder index to 0
     this.gameApp.recorder.resetIndex();
-    console.log("Add ghosts");
+
+    // Add some ghosts
     for (var i = 0; i < this.gameApp.recorder.getGhostAmount(); i++) {
-      console.log("ghostNr: " + i);
       // SPAWN GHOSTS
       var newGhost = {
                     "gid":7,
@@ -54,7 +64,6 @@ class GameState extends MapState {
                     };
       this.addObject(newGhost);
     }
-    console.log("Done ghosts");
 
      // Spawn protag
     var protag = {
@@ -79,7 +88,7 @@ class GameState extends MapState {
   update() {
     super.update();
 
-    this.camera.x++;
+    this.camera.y += this.advanceSpeed / 60;
 
     this._timeInRoom++;
 
@@ -90,7 +99,7 @@ class GameState extends MapState {
     }
     if(this.joypad.b == true &&this.joypad.deltaB)
     {
-    this.gameApp.recorder.printEntireRecord(0);
+      //this.gameApp.recorder.printEntireRecord(0);
     }
 
   }
