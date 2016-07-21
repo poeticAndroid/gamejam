@@ -5,6 +5,7 @@ import MapState      = require("../lib/MapState");
 import MapSprite     = require("../lib/MapSprite");
 
 import Protagonist   = require("../sprites/Protagonist");
+import Grunt         = require("../sprites/Grunt");
 import Text          = require("../sprites/Text");
 
 import Recorder     = require("../lib/Recorder");
@@ -17,6 +18,7 @@ class GameState extends MapState {
     super(gameApp, mapName, _url);
     this.eng.antialias = false;
     this.objectClasses["protagonist"] = Protagonist;
+    this.objectClasses["grunt"] = Grunt;
     this.objectClasses["text"] = Text;
     this.joypad.mode = "rpg";
 

@@ -29,7 +29,7 @@ class Recorder{
     this._ghostData[this._ghostAmount] = [];
   }
 
-  record(recordee:Protagonist)
+  record(recordee:Phaser.Sprite)
   {
     //this._ghostData[this._ghostAmount].push(recordee.getVelocity());
   }
