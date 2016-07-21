@@ -18,7 +18,7 @@ class GameState extends MapState {
     this.eng.antialias = false;
     this.objectClasses["protagonist"] = Protagonist;
     this.objectClasses["text"] = Text;
-    this.joypad.mode = "rc";
+    this.joypad.mode = "rpg";
 
   }
 
