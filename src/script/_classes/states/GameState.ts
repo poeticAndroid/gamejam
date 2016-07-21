@@ -101,7 +101,6 @@ class GameState extends MapState {
     {
       //this.gameApp.recorder.printEntireRecord(0);
     }
-
   }
 
   command(command:string, args:any):boolean {
