@@ -45,7 +45,7 @@ class Protagonist extends MapSprite {
     // Calculates velocity and moves the protagonist
     this.handleMovement();
     // Shoots continually
-    this._weapon.shoot();
+  //  this._weapon.shoot();
   }
 
   calculateVelocity()
