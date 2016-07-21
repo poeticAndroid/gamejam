@@ -45,7 +45,7 @@ class GameState extends MapState {
 
     this._timeInRoom++;
 
-
+    
   }
 
   command(command:string, args:any):boolean {
