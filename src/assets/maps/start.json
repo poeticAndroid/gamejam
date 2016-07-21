@@ -19,28 +19,6 @@
          "objects":[
                 {
                  "gid":6,
-                 "height":32,
-                 "id":113,
-                 "name":"",
-                 "properties":
-                    {
-                     "arguments":"http:\/\/codeartistic.ninja\/",
-                     "command":"url"
-                    },
-                 "propertytypes":
-                    {
-                     "arguments":"string",
-                     "command":"string"
-                    },
-                 "rotation":0,
-                 "type":"button",
-                 "visible":true,
-                 "width":304,
-                 "x":640,
-                 "y":528
-                }, 
-                {
-                 "gid":6,
                  "height":64,
                  "id":105,
                  "name":"",
@@ -132,13 +110,13 @@
                 {
                  "height":16,
                  "id":85,
-                 "name":"My mountain to climb",
+                 "name":"Polar bears..?",
                  "properties":
                     {
                      "center":true,
                      "cols":12,
                      "scale":2,
-                     "text":"My mountain to climb"
+                     "text":"Polar bears..?"
                     },
                  "propertytypes":
                     {
@@ -153,27 +131,6 @@
                  "width":16,
                  "x":32,
                  "y":32
-                }, 
-                {
-                 "height":16,
-                 "id":108,
-                 "name":"codeartistic.ninja",
-                 "properties":
-                    {
-                     "scale":0.5,
-                     "text":"codeartistic.ninja"
-                    },
-                 "propertytypes":
-                    {
-                     "scale":"float",
-                     "text":"string"
-                    },
-                 "rotation":0,
-                 "type":"text",
-                 "visible":true,
-                 "width":16,
-                 "x":648,
-                 "y":504
                 }, 
                 {
                  "gid":9,
