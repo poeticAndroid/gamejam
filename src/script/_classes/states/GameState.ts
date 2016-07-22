@@ -132,7 +132,7 @@ class GameState extends MapState {
 
       // Debugging
       this.gameApp.recorder.update();
-      if(this.joypad.a == true && this.joypad.deltaA && this.objectType("protagonist").getTop() !== undefined)
+ /*     if(this.joypad.a == true && this.joypad.deltaA && this.objectType("protagonist").getTop() !== undefined)
       {
         this.objectType("protagonist").getTop().kill();
       }
@@ -140,7 +140,7 @@ class GameState extends MapState {
       {
         this.objectType("protagonist").getTop().upgrade(5);
       }
-      // Collision detection
+*/      // Collision detection
       this.checkCollisions();
 
       // Check if player died and reset if it is
@@ -166,8 +166,10 @@ class GameState extends MapState {
 
   timeRelatedStuff()
   {
-    this._timeInRoom += this.game.time.physicsElapsed;
-    this._timeText.text = "Time: " + parseFloat(this._timeInRoom.toString()).toFixed(1);
+  //  this._timeInRoom += this.game.time.physicsElapsed;
+    //this._timeText.text = "Countdown: " + parseFloat(this._timeInRoom.toString()).toFixed(1);
+    this._timeText.text = "Countdown: " + Math.floor(this.camera.y / 60);
+ 
   }
 
   checkPlayerDeath()
