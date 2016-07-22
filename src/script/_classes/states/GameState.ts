@@ -3,12 +3,14 @@
 import GameApp       = require("../GameApp");
 import MapState      = require("../lib/MapState");
 import MapSprite     = require("../lib/MapSprite");
-import Protagonist   = require("../sprites/Protagonist");
-import Grunt         = require("../sprites/Grunt");
-import Patrol         = require("../sprites/Patrol");
 import Text          = require("../sprites/Text");
 
 import Recorder      = require("../lib/Recorder");
+
+import Protagonist   = require("../sprites/Protagonist");
+import Grunt         = require("../sprites/Grunt");
+import Patrol        = require("../sprites/Patrol");
+import Powerup       = require("../sprites/Powerup");
 
 /**
  * GameState class
@@ -27,6 +29,7 @@ class GameState extends MapState {
     this.objectClasses["grunt"] = Grunt;
     this.objectClasses["text"] = Text;
     this.objectClasses["patrol"] = Patrol;
+    this.objectClasses["powerup"] = Powerup;
     this.joypad.mode = "rpg";
     this.recorder = this.gameApp.recorder;
   }
@@ -143,6 +146,7 @@ class GameState extends MapState {
     this.game.physics.arcade.overlap(this.objectType("bullet"), this.objectType("grunt"), this._bulletMeetsGrunt, (a:any, b:any)=>{ return a.alive && b.alive;}, this);
     this.game.physics.arcade.overlap(this.objectType("bullet"), this.objectType("patrol"), this._bulletMeetsGrunt, (a:any, b:any)=>{ return a.alive && b.alive;}, this);
     this.game.physics.arcade.overlap(this.objectType("grunt"), this.objectType("protagonist"), this._gruntMeetsProtagonist, (a:any, b:any)=>{ return a.alive && b.alive;}, this);
+    this.game.physics.arcade.overlap(this.objectType("protagonist"), this.objectType("powerup"), this._ProtagonistMeetsPowerup, (a:any, b:any)=>{ return a.alive && b.alive;}, this);
   }
 
   timeRelatedStuff()
@@ -188,11 +192,21 @@ class GameState extends MapState {
   _bulletMeetsGrunt(bullet:Phaser.Sprite, grunt:Grunt) {
     
     var chance = Math.random();
-    if(chance < 0.2)
+    if(chance < 0.9)
     {
-      this.objectType("protagonist").getTop().upgrade(1);
-      var upgradeSound = this.add.audio("upgrade1");
-      upgradeSound.play();
+      // Spawn protag
+      var powerup = {
+                  "gid":34,
+               "height":32,
+                   "name":"",
+               "rotation":0,
+                   "type":"powerup",
+                "visible":true,
+                  "width":32,
+                      "x":grunt.position.x,
+                      "y":grunt.position.y
+                    };
+      this.addObject(powerup);
     }
 
     grunt.gib();
@@ -202,6 +216,13 @@ class GameState extends MapState {
 
   _gruntMeetsProtagonist(grunt:Grunt, protagonist:Protagonist) {
     protagonist.kill();
+  }
+
+  _ProtagonistMeetsPowerup(protagonist:Protagonist, powerup:Powerup) {
+    powerup.gib();
+    var upgradeSound = this.add.audio("upgrade1");
+    upgradeSound.play();
+    this.objectType("protagonist").getTop().upgrade(1);
   }
 
 }
