@@ -15,6 +15,10 @@ class Grunt extends MapSprite {
   private _maxVelocity:number;
   private _weapon:any;
 
+  //Destroy emitter:
+  private _emitter:Phaser.Particles.Arcade.Emitter;
+  private _gibTTL:number;
+
   constructor(mapState:GameState, object:any) {
     super(mapState, object);
     this.moveAnchor(.5);
@@ -22,6 +26,7 @@ class Grunt extends MapSprite {
     // POSITION AND VELOCITY
     this._velocity = new Phaser.Point(0,0);
     this._weapon = 0;
+    this._gibTTL = 8000;
 
 
 
@@ -47,6 +52,9 @@ class Grunt extends MapSprite {
 
   update() 
   {
+    if (!this.inCamera) {
+      return;
+    }
     // Calculates velocity and moves the protagonist
     this.handleMovement();
 
@@ -93,6 +101,19 @@ class Grunt extends MapSprite {
     return this._velocity;
   }
 
+  destroyGibEmitter() {
+
+    this._emitter.destroy();
+
+  }
+
+  gib() {
+    this._emitter = this.mapState.add.emitter(this.position.x, this.position.y);
+    this._emitter.makeParticles('bullet_16x16');
+    this._emitter.start(true, this._gibTTL,null,5);
+    this._emitter.setAlpha(0,1,this._gibTTL);
+    this.mapState.time.events.add(this._gibTTL, this.destroyGibEmitter, this);
+  }
 
 }
 export = Grunt;
