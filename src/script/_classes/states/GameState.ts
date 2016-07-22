@@ -16,6 +16,7 @@ import Recorder      = require("../lib/Recorder");
 class GameState extends MapState {
   public recorder : Recorder;
   public advanceSpeed : number;
+  private _timeText : Phaser.Text;
 
   constructor(gameApp:GameApp, mapName?:string, _url?:string) {
     super(gameApp, mapName, _url);
@@ -42,6 +43,10 @@ class GameState extends MapState {
 
     this.physics.startSystem(Phaser.Physics.ARCADE);
 
+    //
+    this._timeText = this.eng.add.text(10,10,this._timeInRoom.toString(), {fill: "white"});
+    this._timeText.fixedToCamera = true;
+
 
     // Set recorder index to 0
     this.gameApp.recorder.resetIndex();
@@ -59,7 +64,7 @@ class GameState extends MapState {
                 "visible":true,
                   "width":64,
                       "x":400,
-                      "y":376,
+                      "y":9500,
                       "ghostNr":i
                     };
       this.addObject(newGhost);
@@ -75,7 +80,7 @@ class GameState extends MapState {
               "visible":true,
                 "width":64,
                     "x":400,
-                    "y":376
+                    "y":9500
                   };
     this.addObject(protag);
 
@@ -90,7 +95,8 @@ class GameState extends MapState {
 
     this.camera.y += this.advanceSpeed / 60;
 
-    this._timeInRoom++;
+    this._timeInRoom += this.game.time.physicsElapsed;
+    this._timeText.text = "Time: " + parseFloat(this._timeInRoom.toString()).toFixed(1);
 
     this.gameApp.recorder.update();
     if(this.joypad.a == true &&this.joypad.deltaA)
