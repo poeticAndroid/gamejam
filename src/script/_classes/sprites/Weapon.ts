@@ -33,7 +33,7 @@ namespace Weapon {
     }
   }
 
-  class Weapon
+  export class Weapon
   {
     protected _weapon:Phaser.Weapon;
     public name:string;
