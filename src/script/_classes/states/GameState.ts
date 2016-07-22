@@ -17,6 +17,7 @@ class GameState extends MapState {
   public recorder : Recorder;
   public advanceSpeed : number;
   private _timeText : Phaser.Text;
+  private _ghostText : Phaser.Text;
   private _restarting : number;
 
   constructor(gameApp:GameApp, mapName?:string, _url?:string) {
@@ -50,9 +51,13 @@ class GameState extends MapState {
 
     this._restarting = 0;
 
-    //
+    // Time
     this._timeText = this.eng.add.text(10,10,this._timeInRoom.toString(), {fill: "white"});
     this._timeText.fixedToCamera = true;
+
+    // Ghost amount
+    this._ghostText = this.eng.add.text(10,34,this._timeInRoom.toString(), {fill: "white"});
+    this._ghostText.fixedToCamera = true;
 
 
     // Set recorder index to 0
@@ -107,6 +112,9 @@ class GameState extends MapState {
 
     // Update time related variables
     this.timeRelatedStuff()
+
+    // Update ghost text
+    this._ghostText.text = "Ghosts: " + (this.gameApp.recorder.getGhostAmount() - 1).toString();
 
 
     // Debugging
