@@ -3082,6 +3082,20 @@
          "tileheight":128,
          "tilewidth":128,
          "transparentcolor":"#ff00ff"
+        }, 
+        {
+         "columns":1,
+         "firstgid":34,
+         "image":"..\/gfx\/powerup_32x32.png",
+         "imageheight":128,
+         "imagewidth":32,
+         "margin":0,
+         "name":"powerup_32x32",
+         "spacing":0,
+         "tilecount":4,
+         "tileheight":32,
+         "tilewidth":32,
+         "transparentcolor":"#ff00ff"
         }],
  "tilewidth":32,
  "version":1,
