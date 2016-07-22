@@ -109,14 +109,19 @@ class Patrol extends MapSprite {
   }
 
   gib() {
+    var velX = this.body.velocity.x;
+    var velY = this.body.velocity.y;
+
     this._dead = true;
     this.alive = false;
     this._emitter = this.mapState.add.emitter(this.position.x, this.position.y);
     this._emitter.makeParticles('gore_16x16');
-    this._emitter.setAlpha(1,0,8000, Phaser.Easing.Exponential.Out);
-    this._emitter.start(true, this._gibTTL,null,5);
-    this.mapState.time.events.add(this._gibTTL*2, ()=>{this.destroyGibEmitter(); this.destroy();}, this);
-    this.play("die", 10, false, true);
+    this._emitter.setAlpha(1,0,5000, Phaser.Easing.Exponential.Out);
+    this._emitter.setYSpeed(velY- 300 - Math.random() * 100, velY - 100);
+    this._emitter.setXSpeed(-120 + velX,120 + velX);
+    this._emitter.start(true, this._gibTTL,null,Math.floor(Math.random()*20) + 10);
+    this.mapState.time.events.add(this._gibTTL*3, ()=>{this.destroyGibEmitter(); this.destroy();}, this);
+    this.play("die", 7, false, true);
     this.playSound();
   }
 
