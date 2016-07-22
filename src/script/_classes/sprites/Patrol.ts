@@ -29,7 +29,9 @@ class Patrol extends MapSprite {
   constructor(public mapState:GameState, object:any) {
     super(mapState, object);
     this.moveAnchor(.5);
-    this.animations.add("die", [1, 2, 3, 4, 5, 6], 15, false);
+    this.animations.add("walk", [0, 1], 5, true);
+    this.animations.add("die", [2, 3, 4, 5, 6], 15, false);
+    this.play("walk");
 
     //SOUND
     this.addSound();
@@ -85,7 +87,7 @@ class Patrol extends MapSprite {
         this._outOfBoundsCount = 5;
       }
     }
-    this.body.velocity.set(this._direction, 0);
+    this.body.velocity.set(this._direction, -.125);
     this.body.velocity = this.body.velocity.setMagnitude(this._maxVelocity);
   }
   
