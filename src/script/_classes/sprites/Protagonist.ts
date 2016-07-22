@@ -21,10 +21,15 @@ class Protagonist extends MapSprite {
   private _maxVelocity:number;
   private _weapon:any;
 
+  //sound
+  private _explosion:Phaser.Sound;
+
   constructor(mapState:GameState, object:any) {
     super(mapState, object);
     this.moveAnchor(.5);
     this.animations.add("die", [1, 2, 3, 4, 5, 6], 15, false);
+
+    this.addSound();
 
     if(object.ghostNr !== undefined)
     {
@@ -60,6 +65,10 @@ class Protagonist extends MapSprite {
       this._weapon = new Weapon(this);
     }                     
 
+  }
+
+  addSound() {
+    this._explosion = this.mapState.add.audio('explosion1');
   }
 
   update() 
@@ -152,6 +161,7 @@ class Protagonist extends MapSprite {
     if (this.alive) {
       this.alive = false;
       this.play("die", 10, false, true);
+      this._explosion.play();
     } else {
       super.destroy();
     }

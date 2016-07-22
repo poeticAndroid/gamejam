@@ -102,7 +102,7 @@ class Grunt extends MapSprite {
     this.alive = false;
     this._emitter = this.mapState.add.emitter(this.position.x, this.position.y);
     this._emitter.makeParticles('gore_16x16');
-    this._emitter.setAlpha(1,0,5000, Phaser.Easing.Exponential.Out);
+    this._emitter.setAlpha(1,0,8000, Phaser.Easing.Exponential.Out);
     this._emitter.start(true, this._gibTTL,null,5);
     this.mapState.time.events.add(this._gibTTL*2, ()=>{this.destroyGibEmitter(); this.destroy();}, this);
     this.play("die", 10, false, true);
