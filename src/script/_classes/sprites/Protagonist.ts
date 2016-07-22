@@ -29,13 +29,36 @@ class Protagonist extends MapSprite {
         "uniform vec2      resolution;",
         "uniform sampler2D iChannel0;",
 
+        "#ifdef GL_ES",
+        "precision highp float;",
+        "#endif",
+
+        "#define PI 3.1416",
+
         "void main( void ) {",
 
-            "vec2 uv = gl_FragCoord.xy / resolution.xy;",
-            "uv.y *= -1.0;",
-            "uv.y += (sin((uv.x + (time * 0.5)) * 10.0) * 0.1) + (sin((uv.x + (time * 0.2)) * 32.0) * 0.01);",
-            "vec4 texColor = texture2D(iChannel0, uv);",
-            "gl_FragColor = texColor;",
+            "//map the xy pixel co-ordinates to be between -1.0 to +1.0 on x and y axes",
+            "//and alter the x value according to the aspect ratio so it isn't 'stretched'",
+
+            "vec2 p = (3.3 * gl_FragCoord.xy / resolution.xy - 0.7) * vec2(resolution.x / resolution.y, 1.0);",
+
+            "//now, this is the usual part that uses the formula for texture mapping a ray-",
+            "//traced cylinder using the vector p that describes the position of the pixel",
+            "//from the centre.",
+
+            "vec2 uv = vec2(atan(p.y, p.x) * 1.0/PI, 0.1 / sqrt(dot(p, p))) * vec2(0.3, 1.0);",
+
+            "//now this just 'warps' the texture read by altering the u coordinate depending on",
+            "//the val of the v coordinate and the current time",
+
+            "uv.x += sin(2.3 * uv.y + time * 2.5);",
+
+            "//this divison makes the color value 'darker' into the distance, otherwise",
+            "//everything will be a uniform brightness and no sense of depth will be present.",
+
+            "vec3 c = texture2D(iChannel0, uv).xyz / (uv.y * 0.7 + 1.0);",
+
+            "gl_FragColor = vec4(c, 1.0);",
 
         "}"
     ];
@@ -102,7 +125,6 @@ class Protagonist extends MapSprite {
     }
 
     if (this._filter !== undefined) {
-      console.log("Filter updating");
       this._filter.update();
     }
   }
@@ -213,8 +235,7 @@ class Protagonist extends MapSprite {
         };
 
       this._filter = new Phaser.Filter(this.mapState.game, customUniforms, this._fragmentSrc);
-      this._filter.setResolution(800, 600);
-
+      this._filter.setResolution(1950, 740);
       this._backgroundSprite.filters = [ this._filter ];
       }
     } else {
