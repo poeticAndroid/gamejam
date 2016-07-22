@@ -127,6 +127,7 @@ class GameState extends MapState {
     }
     if(this.joypad.b == true &&this.joypad.deltaB)
     {
+      this.objectType("protagonist").getTop().upgrade(5);
     }
     // Collision detection
     this.checkCollisions();

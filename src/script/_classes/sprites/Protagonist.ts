@@ -20,8 +20,7 @@ class Protagonist extends MapSprite {
 
   // stats
   private _maxVelocity:number;
-  private _weapon:any;
-
+  private _weapon:Weapon.Weapon;
   private _fragmentSrc = [
 
         "precision mediump float;",
@@ -105,6 +104,31 @@ class Protagonist extends MapSprite {
     if (this._filter !== undefined) {
       console.log("Filter updating");
       this._filter.update();
+    }
+  }
+
+  upgrade(point:number)
+  {
+    switch((Math.random() * 4) % 5)
+    {
+      case 0:
+        this._weapon.setFireLength(this._weapon.getFireLength() + point * 5);
+        break;
+      case 1:
+        this._weapon.setFireRate(this._weapon.getFireRate() * Math.pow(0.9,point));
+        break;
+      case 2:
+        this._weapon.setBulletSpeed(this._weapon.getBulletSpeed() + point * 5);
+        break;
+      case 3:
+        this._weapon.setBulletAmount(this._weapon.getBulletAmount() + point);
+        break;
+      case 4:
+        this._weapon.setFireLength(this._weapon.getFireLength() + point * 5);
+        this._weapon.setFireRate(this._weapon.getFireRate() * Math.pow(0.9,point));
+        this._weapon.setBulletSpeed(this._weapon.getBulletSpeed() + point * 5);
+        this._weapon.setBulletAmount(this._weapon.getBulletAmount() + point);
+        break;
     }
   }
 
