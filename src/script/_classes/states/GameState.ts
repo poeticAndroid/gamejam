@@ -17,6 +17,7 @@ class GameState extends MapState {
   public recorder : Recorder;
   public advanceSpeed : number;
   private _timeText : Phaser.Text;
+  private _restarting : number;
 
   constructor(gameApp:GameApp, mapName?:string, _url?:string) {
     super(gameApp, mapName, _url);
@@ -45,6 +46,8 @@ class GameState extends MapState {
     this.advanceSpeed = -60;
 
     this.physics.startSystem(Phaser.Physics.ARCADE);
+
+    this._restarting = 0;
 
     //
     this._timeText = this.eng.add.text(10,10,this._timeInRoom.toString(), {fill: "white"});
@@ -98,21 +101,48 @@ class GameState extends MapState {
 
     this.camera.y += this.advanceSpeed / 60;
 
-    this._timeInRoom += this.game.time.physicsElapsed;
-    this._timeText.text = "Time: " + parseFloat(this._timeInRoom.toString()).toFixed(1);
+    // Update time related variables
+    this.timeRelatedStuff()
 
+
+    // Debugging
     this.gameApp.recorder.update();
     if(this.joypad.a == true &&this.joypad.deltaA)
     {
-      this.game.state.restart();
+      this.objectType("protagonist").getTop().kill();
     }
     if(this.joypad.b == true &&this.joypad.deltaB)
     {
-      //this.gameApp.recorder.printEntireRecord(0);
     }
+    // Collision detection
+    this.checkCollisions();
 
+    // Check if player died and reset if it is
+    this.checkPlayerDeath();
+  }
+
+  checkCollisions()
+  {
     this.game.physics.arcade.overlap(this.objectType("bullet"), this.objectType("grunt"), this._bulletMeetsGrunt, (a:any, b:any)=>{ return a.alive && b.alive;}, this);
     this.game.physics.arcade.overlap(this.objectType("grunt"), this.objectType("protagonist"), this._gruntMeetsProtagonist, (a:any, b:any)=>{ return a.alive && b.alive;}, this);
+  }
+
+  timeRelatedStuff()
+  {
+    this._timeInRoom += this.game.time.physicsElapsed;
+    this._timeText.text = "Time: " + parseFloat(this._timeInRoom.toString()).toFixed(1);
+  }
+
+  checkPlayerDeath()
+  {
+    if(this._restarting != 0 || this.objectType("protagonist").getTop().alive == false)
+    {
+      this._restarting += this.game.time.physicsElapsed;
+      if(this._restarting > 2)
+      {
+        this.game.state.restart();
+      }
+    }
   }
 
   command(command:string, args:any):boolean {
