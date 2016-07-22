@@ -103,6 +103,7 @@ class GameState extends MapState {
     }
 
     this.game.physics.arcade.overlap(this.objectType("bullet"), this.objectType("grunt"), this._bulletMeetsGrunt, null, this);
+    this.game.physics.arcade.overlap(this.objectType("grunt"), this.objectType("protagonist"), this._gruntMeetsProtagonist, null, this);
   }
 
   command(command:string, args:any):boolean {
@@ -128,8 +129,12 @@ class GameState extends MapState {
   private _timeInRoom=0;
 
   _bulletMeetsGrunt(bullet:Phaser.Sprite, grunt:Grunt) {
-    grunt.destroy();
+    grunt.kill();
     bullet.kill();
+  }
+
+  _gruntMeetsProtagonist(grunt:Grunt, protagonist:Protagonist) {
+    protagonist.destroy();
   }
 
 }

@@ -47,13 +47,16 @@ class Grunt extends MapSprite {
 
   update() 
   {
+    if (!this.inCamera) {
+      return;
+    }
     // Calculates velocity and moves the protagonist
     this.handleMovement();
 
     // Records latest position
     if(this._ghostNr == null) 
     {
-      this.mapState.gameApp.recorder.record(this);
+      // this.mapState.gameApp.recorder.record(this);
     }
   }
 
