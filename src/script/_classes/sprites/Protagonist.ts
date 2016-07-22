@@ -131,26 +131,24 @@ class Protagonist extends MapSprite {
 
   upgrade(point:number)
   {
-    switch((Math.random() * 4) % 5)
-    {
-      case 0:
-        this._weapon.setFireLength(this._weapon.getFireLength() + point * 5);
-        break;
-      case 1:
-        this._weapon.setFireRate(this._weapon.getFireRate() * Math.pow(0.9,point));
-        break;
-      case 2:
-        this._weapon.setBulletSpeed(this._weapon.getBulletSpeed() + point * 5);
-        break;
-      case 3:
+    var chance = Math.random();
+    if(chance < 0.5){
         this._weapon.setBulletAmount(this._weapon.getBulletAmount() + point);
-        break;
-      case 4:
+    }
+    else if(chance < 0.6){
+        this._weapon.setFireRate(this._weapon.getFireRate() * Math.pow(0.9,point));
+    }
+    else if(chance < 0.7){
+        this._weapon.setBulletSpeed(this._weapon.getBulletSpeed() + point * 5);
+    }
+    else if(chance < 0.8){
+      this._weapon.setFireLength(this._weapon.getFireLength() + point * 5);
+    }
+    else if(chance < 0.9){
         this._weapon.setFireLength(this._weapon.getFireLength() + point * 5);
         this._weapon.setFireRate(this._weapon.getFireRate() * Math.pow(0.9,point));
         this._weapon.setBulletSpeed(this._weapon.getBulletSpeed() + point * 5);
         this._weapon.setBulletAmount(this._weapon.getBulletAmount() + point);
-        break;
     }
   }
 
