@@ -21,9 +21,6 @@ class Protagonist extends MapSprite {
   private _maxVelocity:number;
   private _weapon:any;
 
-  //sound
-  private _explosion:Phaser.Sound;
-
   constructor(mapState:GameState, object:any) {
     super(mapState, object);
     this.moveAnchor(.5);
@@ -60,13 +57,13 @@ class Protagonist extends MapSprite {
   addSound() {
     var rand = Math.random();
     if (rand < 0.3) {
-    this._explosion = this.mapState.add.audio('explosion1');
+    this.sfx = this.mapState.add.audio('explosion1');
   }
   else if (rand < 0.65) {
-    this._explosion = this.mapState.add.audio('explosion2');
+    this.sfx = this.mapState.add.audio('explosion2');
   }
   else {
-    this._explosion = this.mapState.add.audio('explosion3');
+    this.sfx = this.mapState.add.audio('explosion3');
   }
   }
 
@@ -160,8 +157,8 @@ class Protagonist extends MapSprite {
     if (this.alive) {
       this.alive = false;
       this.play("die", 10, false, true);
-      if (this._explosion != undefined)
-        this._explosion.play();
+      if (this.sfx != undefined)
+        this.playSound();
     } else {
       super.destroy();
     }
