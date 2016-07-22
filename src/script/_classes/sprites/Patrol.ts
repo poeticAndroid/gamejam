@@ -23,9 +23,6 @@ class Patrol extends MapSprite {
   private _emitter:Phaser.Particles.Arcade.Emitter;
   private _gibTTL:number;
 
-  //Sound:
-  private _splat:Phaser.Sound;
-
   constructor(public mapState:GameState, object:any) {
     super(mapState, object);
     this.moveAnchor(.5);
@@ -57,13 +54,13 @@ class Patrol extends MapSprite {
   addSound() {
     var rand = Math.random();
     if (rand < 0.3) {
-    this._splat = this.mapState.add.audio('splat1');
+    this.sfx = this.mapState.add.audio('splat1');
   }
   else if (rand < 0.65) {
-    this._splat = this.mapState.add.audio('splat2');
+    this.sfx = this.mapState.add.audio('splat2');
   }
   else {
-    this._splat = this.mapState.add.audio('splat3');
+    this.sfx = this.mapState.add.audio('splat3');
   }
   }
 
@@ -120,7 +117,7 @@ class Patrol extends MapSprite {
     this._emitter.start(true, this._gibTTL,null,5);
     this.mapState.time.events.add(this._gibTTL*2, ()=>{this.destroyGibEmitter(); this.destroy();}, this);
     this.play("die", 10, false, true);
-    this._splat.play();
+    this.playSound();
   }
 
 }
