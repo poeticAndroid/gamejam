@@ -25,19 +25,18 @@ class Protagonist extends MapSprite {
     super(mapState, object);
     this.moveAnchor(.5);
 
-    this._recorder = this.mapState.gameApp.recorder;
-
-
     if(object.ghostNr !== undefined)
     {
       this._ghostNr = object.ghostNr;
-      console.log("Created ghost with ghostNr: " + this._ghostNr);
-      this.alpha = (this._ghostNr+2) / (this._recorder.getGhostAmount()+2);
+      // linear alpha drop from 0.9 to 0.1
+      this.alpha = 0.2 + ((this._ghostNr + 1) / this.mapState.gameApp.recorder.getGhostAmount() * 0.7);
+      // Slight blue tint
+      this.tint = 0xA0A0FF;
+      //console.log("Created ghost with ghostNr: " + this._ghostNr);
     }
     else
     {
       this._ghostNr = null;
-      this.tint = 0x66ccff;
       joypad.start();
     }
 
@@ -87,7 +86,8 @@ class Protagonist extends MapSprite {
       //this.mapState.gameApp.recorder.print();
       if(this.body.velocity === null)
       {
-        this.body.velocity = new Phaser.Point(0,-60);
+        this.destroy();
+        //this.body.velocity = new Phaser.Point(0,-60);
       }
     }
     else

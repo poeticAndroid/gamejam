@@ -56,7 +56,7 @@ class Grunt extends MapSprite {
     // Records latest position
     if(this._ghostNr == null) 
     {
-      // this.mapState.gameApp.recorder.record(this);
+      //this.mapState.gameApp.recorder.record(this);
     }
   }
 
