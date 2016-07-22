@@ -12,6 +12,7 @@ class Weapon {
 
   constructor(public prot:Protagonist) {
     this._weapon = this.prot.mapState.add.weapon();
+    this._weapon.bullets = null;
     this._weapon.createBullets(1, 'bullet_16x16');
     this._weapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
     this._weapon.bulletKillDistance = 350;
