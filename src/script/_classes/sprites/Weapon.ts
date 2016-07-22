@@ -8,21 +8,23 @@ import Protagonist = require("./Protagonist");
 
 class Weapon {
 
-  private weapon:Phaser.Weapon;
+  private _weapon:Phaser.Weapon;
 
   constructor(public prot:Protagonist) {
-    this.weapon = this.prot.mapState.add.weapon(1, 'bullet_16x16');
-    this.weapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
-    this.weapon.bulletKillDistance = 350;
-    this.weapon.bulletSpeed = 400;
-    this.weapon.trackSprite(prot, 14, 0);
-    this.weapon.bulletAngleOffset = 90;
-    this.prot.mapState.objectType("bullet").add(this.weapon.bullets);
+    this._weapon = this.prot.mapState.add.weapon();
+    this._weapon.createBullets(1, 'bullet_16x16');
+    this._weapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
+    this._weapon.bulletKillDistance = 350;
+    this._weapon.bulletSpeed = 400;
+    this._weapon.fireRate = 100;
+    this._weapon.trackSprite(prot, 14, 0);
+    this._weapon.bulletAngleOffset = 90;
+    this.prot.mapState.objectType("bullet").add(this._weapon.bullets);
   }
 
   shoot()
   {
-    this.weapon.fire(this.prot);
+    this._weapon.fire(this.prot);
   }
 }
 export = Weapon;
