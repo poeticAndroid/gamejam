@@ -83,11 +83,9 @@ class Grunt extends MapSprite {
     {
       // PLAYER CONTROLLED      
       // Calculate velocity
-      var target = this.mapState.objectType("protagonist").getTop();
-      if (target) {
-        this._velocity.set(target.position.x - this.position.x, target.position.y - this.position.y);
-        this._velocity = this._velocity.setMagnitude(this._maxVelocity);
-      }
+      var target = this.mapState.objectType("protagonist").getTop() !== undefined ? this.mapState.objectType("protagonist").getTop() : this;
+      this._velocity.set(target.position.x - this.position.x, target.position.y - this.position.y);
+      this._velocity = this._velocity.setMagnitude(this._maxVelocity);
     }
   }
 
