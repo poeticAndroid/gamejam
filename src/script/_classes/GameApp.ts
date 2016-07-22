@@ -16,7 +16,7 @@ class GameApp extends BaseGameApp {
 
   constructor(containerId: string, fullScreen?: boolean) {
     super(containerId, 960, 540, fullScreen);
-    var maps = [ "start", "settings" ];
+    var maps = [ "start", "settings", "win" ];
     for (var i in maps) {
       this.eng.state.add(maps[i] + "_state", new GameState(this, maps[i] + "_map", "assets/maps/" + maps[i] + ".json"));
     }
