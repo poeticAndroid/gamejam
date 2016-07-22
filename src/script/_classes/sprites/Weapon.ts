@@ -7,21 +7,36 @@ import Protagonist = require("./Protagonist");
  */
 
 namespace Weapon {
-  export function newWeapon(prot:Protagonist, name?:string)
+  export function newWeapon(prot:Protagonist, otherWep?:Weapon)
   {
-    switch (name) 
+    var wep:Weapon;
+    if(otherWep !== undefined){
+      switch (otherWep.name) 
+      {
+        case "SuperBullet":
+          wep = new SuperBullet(prot);
+          break;
+        default:
+          wep = new StndBullet(prot);
+          break;
+      }
+      otherWep.getFireLength   ? wep.setFireLength(otherWep.getFireLength()) : 0;
+      otherWep.getFireRate     ? wep.setFireRate(otherWep.getFireRate()) : 0;
+      otherWep.getBulletSpeed  ? wep.setBulletSpeed(otherWep.getBulletSpeed()) : 0;
+      otherWep.getBulletKey    ? wep.setBulletKey(otherWep.getBulletKey()) : 0;
+      otherWep.getBulletAmount ? wep.setBulletAmount(otherWep.getBulletAmount()) : 0;
+      return wep;
+    }
+    else
     {
-      case "SuperBullet":
-        return new SuperBullet(prot);
-      
-      default:
-        return new StndBullet(prot);
+      return new StndBullet(prot);
     }
   }
-  
+
   class Weapon
   {
     protected _weapon:Phaser.Weapon;
+    public name:string;
 
     // Firerate
     getFireRate(){ return this._weapon.fireRate;}
@@ -68,6 +83,7 @@ namespace Weapon {
 
     constructor(public prot:Protagonist) {
       super(prot);
+      this.name = "StndBullet";
       this.setBulletKey('bullet_16x16');
       this.setBulletAmount(1);
       this.setFireLength(350);
@@ -82,6 +98,7 @@ namespace Weapon {
     constructor(public prot:Protagonist)
     {
       super(prot);
+      this.name = "SuperBullet";
       this.setBulletAmount(10);
     }
   }

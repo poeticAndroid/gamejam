@@ -53,7 +53,7 @@ class Protagonist extends MapSprite {
     this._maxVelocity = object._maxVelocity ? object._maxVelocity : 300;
     this.maxHealth = object.maxHealth ? object.maxHealth : 1;
     this.health = object.Health ? object.Health : 1;
-    this._weapon = object.weapon !== undefined ? Weapon.newWeapon(this, object.weapon.name) : Weapon.newWeapon(this);
+    this._weapon = object.weapon !== undefined ? Weapon.newWeapon(this, object.weapon) : Weapon.newWeapon(this);
  
 
   }

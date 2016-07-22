@@ -87,7 +87,10 @@ class GameState extends MapState {
               "visible":true,
                 "width":64,
                     "x":400,
-                    "y":9500
+                    "y":9500,
+                    "weapon": {
+                              "name":"StndBullet"
+                              }
                   };
     this.addObject(protag);
 
