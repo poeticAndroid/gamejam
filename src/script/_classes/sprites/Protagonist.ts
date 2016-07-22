@@ -24,6 +24,7 @@ class Protagonist extends MapSprite {
   constructor(mapState:GameState, object:any) {
     super(mapState, object);
     this.moveAnchor(.5);
+    this.animations.add("die", [1, 2, 3, 4, 5, 6], 15, false);
 
     if(object.ghostNr !== undefined)
     {
@@ -63,6 +64,9 @@ class Protagonist extends MapSprite {
 
   update() 
   {
+    if (!this.alive) {
+      return;
+    }
     // Calculates velocity and moves the protagonist
     this.handleMovement();
     // Shoots continually
@@ -142,6 +146,16 @@ class Protagonist extends MapSprite {
   getVelocity()
   {
     return new Phaser.Point(this.body.velocity.x, this.body.velocity.y);
+  }
+
+  kill() {
+    if (this.alive) {
+      this.alive = false;
+      this.play("die", 15, false, true);
+    } else {
+      super.destroy();
+    }
+    return this;
   }
 
 

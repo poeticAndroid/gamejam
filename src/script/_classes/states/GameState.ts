@@ -141,7 +141,7 @@ class GameState extends MapState {
   }
 
   _gruntMeetsProtagonist(grunt:Grunt, protagonist:Protagonist) {
-    protagonist.destroy();
+    protagonist.kill();
   }
 
 }

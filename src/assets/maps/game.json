@@ -61,7 +61,7 @@
                  "y":223
                 }, 
                 {
-                 "gid":9,
+                 "gid":15,
                  "height":64,
                  "id":120,
                  "name":"",
@@ -73,7 +73,7 @@
                  "y":7976
                 }, 
                 {
-                 "gid":9,
+                 "gid":15,
                  "height":64,
                  "id":122,
                  "name":"",
@@ -85,7 +85,7 @@
                  "y":8024
                 }, 
                 {
-                 "gid":9,
+                 "gid":15,
                  "height":64,
                  "id":123,
                  "name":"",
@@ -97,7 +97,7 @@
                  "y":8080
                 }, 
                 {
-                 "gid":9,
+                 "gid":15,
                  "height":64,
                  "id":124,
                  "name":"",
@@ -109,7 +109,7 @@
                  "y":7968
                 }, 
                 {
-                 "gid":9,
+                 "gid":15,
                  "height":64,
                  "id":125,
                  "name":"",
@@ -121,7 +121,7 @@
                  "y":7904
                 }, 
                 {
-                 "gid":9,
+                 "gid":15,
                  "height":64,
                  "id":126,
                  "name":"",
@@ -133,7 +133,7 @@
                  "y":7920
                 }, 
                 {
-                 "gid":9,
+                 "gid":15,
                  "height":64,
                  "id":127,
                  "name":"",
@@ -170,22 +170,22 @@
          "tilewidth":32
         }, 
         {
-         "columns":1,
+         "columns":7,
          "firstgid":7,
          "image":"..\/gfx\/spaceship_64x64.png",
          "imageheight":64,
-         "imagewidth":64,
+         "imagewidth":448,
          "margin":0,
          "name":"spaceship_64x64",
          "spacing":0,
-         "tilecount":1,
+         "tilecount":7,
          "tileheight":64,
          "tilewidth":64,
          "transparentcolor":"#ff00ff"
         }, 
         {
          "columns":1,
-         "firstgid":8,
+         "firstgid":14,
          "image":"..\/gfx\/bullet_16x16.png",
          "imageheight":16,
          "imagewidth":16,
@@ -199,7 +199,7 @@
         }, 
         {
          "columns":7,
-         "firstgid":9,
+         "firstgid":15,
          "image":"..\/gfx\/polarbear_64x64.png",
          "imageheight":64,
          "imagewidth":448,
