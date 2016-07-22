@@ -89,7 +89,10 @@ class GameState extends MapState {
               "visible":true,
                 "width":64,
                     "x":400,
-                    "y":9500
+                    "y":9500,
+                    "weapon": {
+                              "name":"StndBullet"
+                              }
                   };
     this.addObject(protag);
 
@@ -110,7 +113,7 @@ class GameState extends MapState {
 
     // Debugging
     this.gameApp.recorder.update();
-    if(this.joypad.a == true &&this.joypad.deltaA)
+    if(this.joypad.a == true && this.joypad.deltaA && this.objectType("protagonist").getTop() !== undefined)
     {
       this.objectType("protagonist").getTop().kill();
     }
