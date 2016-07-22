@@ -135,7 +135,7 @@ class Protagonist extends MapSprite {
     // Calculate velocity
     this.calculateVelocity();
 
-    // Move protagonist
+    // Move protagonist if out of bounds
     this.checkCameraBounds();
   }
 
