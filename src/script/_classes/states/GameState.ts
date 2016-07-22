@@ -31,7 +31,7 @@ class GameState extends MapState {
   preload(showProgress=true) {
     if (this.loaded) return;
     super.preload(showProgress);
-    // this.eng.load.audio("body_sfx", "./assets/sfx/body.ogg");
+    this.eng.load.audio("splat1", "./assets/sounds/splat1.mp3");
     this.eng.load.image("font", "./assets/gfx/VictoriaBold.png");
   }
 
