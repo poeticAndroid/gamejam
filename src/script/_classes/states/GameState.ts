@@ -40,6 +40,7 @@ class GameState extends MapState {
     this.eng.load.audio("explosion1", "./assets/sounds/explosion1.wav");
     this.eng.load.audio("explosion2", "./assets/sounds/explosion2.wav");
     this.eng.load.audio("explosion3", "./assets/sounds/explosion3.wav");
+    this.eng.load.audio("upgrade1", "./assets/sounds/upgrade.wav");
     this.eng.load.image("font", "./assets/gfx/VictoriaBold.png");
   }
 
@@ -185,6 +186,15 @@ class GameState extends MapState {
   private _timeInRoom=0;
 
   _bulletMeetsGrunt(bullet:Phaser.Sprite, grunt:Grunt) {
+    
+    var chance = Math.random();
+    if(chance < 0.2)
+    {
+      this.objectType("protagonist").getTop().upgrade(1);
+      var upgradeSound = this.add.audio("upgrade1");
+      upgradeSound.play();
+    }
+
     grunt.gib();
     // grunt.kill();
     bullet.kill();
