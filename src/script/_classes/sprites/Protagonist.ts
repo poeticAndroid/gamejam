@@ -16,12 +16,33 @@ class Protagonist extends MapSprite {
   private _ghostNr:number;
   private _velocity:Phaser.Point;
   private _recorder: Recorder;
+  private _backgroundSprite:Phaser.Sprite;
 
   // stats
   private _maxVelocity:number;
   private _weapon:any;
 
-  constructor(mapState:GameState, object:any) {
+  private _fragmentSrc = [
+
+        "precision mediump float;",
+
+        "uniform float     time;",
+        "uniform vec2      resolution;",
+        "uniform sampler2D iChannel0;",
+
+        "void main( void ) {",
+
+            "vec2 uv = gl_FragCoord.xy / resolution.xy;",
+            "uv.y *= -1.0;",
+            "uv.y += (sin((uv.x + (time * 0.5)) * 10.0) * 0.1) + (sin((uv.x + (time * 0.2)) * 32.0) * 0.01);",
+            "vec4 texColor = texture2D(iChannel0, uv);",
+            "gl_FragColor = texColor;",
+
+        "}"
+    ];
+    private _filter:Phaser.Filter;
+
+  constructor(public mapState:GameState, object:any) {
     super(mapState, object);
     this.moveAnchor(.5);
     this.animations.add("die", [1, 2, 3, 4, 5, 6], 15, false);
@@ -50,8 +71,6 @@ class Protagonist extends MapSprite {
     this.maxHealth = object.maxHealth ? object.maxHealth : 1;
     this.health = object.Health ? object.Health : 1;
     this._weapon = object.weapon !== undefined ? Weapon.newWeapon(this, object.weapon) : Weapon.newWeapon(this);
- 
-
   }
 
   addSound() {
@@ -81,6 +100,11 @@ class Protagonist extends MapSprite {
     if(this._ghostNr === null) 
     {
       this.mapState.gameApp.recorder.record(this);
+    }
+
+    if (this._filter !== undefined) {
+      console.log("Filter updating");
+      this._filter.update();
     }
   }
 
@@ -157,8 +181,18 @@ class Protagonist extends MapSprite {
     if (this.alive) {
       this.alive = false;
       this.play("die", 10, false, true);
-      if (this.sfx != undefined)
+      if (this.sfx != undefined) {
         this.playSound();
+        this._backgroundSprite = this.mapState.layers['background'];
+        var customUniforms = {
+        iChannel0: { type: 'sampler2D', value: this._backgroundSprite, textureData: { repeat: true } }
+        };
+
+      this._filter = new Phaser.Filter(this.mapState.game, customUniforms, this._fragmentSrc);
+      this._filter.setResolution(800, 600);
+
+      this._backgroundSprite.filters = [ this._filter ];
+      }
     } else {
       super.destroy();
     }
