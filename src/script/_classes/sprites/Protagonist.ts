@@ -29,8 +29,6 @@ class Protagonist extends MapSprite {
     this.moveAnchor(.5);
     this.animations.add("die", [1, 2, 3, 4, 5, 6], 15, false);
 
-    this.addSound();
-
     if(object.ghostNr !== undefined)
     {
       this._ghostNr = object.ghostNr;
@@ -43,6 +41,7 @@ class Protagonist extends MapSprite {
     else
     {
       this._ghostNr = null;
+      this.addSound();
       joypad.start();
     }
 
@@ -68,7 +67,16 @@ class Protagonist extends MapSprite {
   }
 
   addSound() {
+    var rand = Math.random();
+    if (rand < 0.3) {
     this._explosion = this.mapState.add.audio('explosion1');
+  }
+  else if (rand < 0.65) {
+    this._explosion = this.mapState.add.audio('explosion2');
+  }
+  else {
+    this._explosion = this.mapState.add.audio('explosion3');
+  }
   }
 
   update() 

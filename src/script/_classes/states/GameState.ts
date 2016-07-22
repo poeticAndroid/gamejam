@@ -37,6 +37,8 @@ class GameState extends MapState {
     this.eng.load.audio("splat2", "./assets/sounds/splat2.mp3");
     this.eng.load.audio("splat3", "./assets/sounds/splat3.mp3");
     this.eng.load.audio("explosion1", "./assets/sounds/explosion1.wav");
+    this.eng.load.audio("explosion2", "./assets/sounds/explosion2.wav");
+    this.eng.load.audio("explosion3", "./assets/sounds/explosion3.wav");
     this.eng.load.image("font", "./assets/gfx/VictoriaBold.png");
   }
 
