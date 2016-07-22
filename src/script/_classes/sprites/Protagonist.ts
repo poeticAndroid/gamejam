@@ -160,7 +160,8 @@ class Protagonist extends MapSprite {
     if (this.alive) {
       this.alive = false;
       this.play("die", 10, false, true);
-      this._explosion.play();
+      if (this._explosion != undefined)
+        this._explosion.play();
     } else {
       super.destroy();
     }
