@@ -25,7 +25,7 @@ class Recorder{
 
   addGhostRecord()
   {
-    this._ghostData[this._ghostAmount] = [];
+    this._ghostData.push([]);
     this._ghostAmount++;
   }
 

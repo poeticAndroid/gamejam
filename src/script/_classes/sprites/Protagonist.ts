@@ -45,20 +45,11 @@ class Protagonist extends MapSprite {
     this.position = object.x && object.y ? new Phaser.Point(object.x, object.y) : new Phaser.Point(0,0);
 
     // stats
-    this._maxVelocity = 300;
-    this.maxHealth = 1;
-    this.health = 1;
-
-    this._weapon = 0;
-
-    if(object.weapon instanceof Weapon)
-    {
-      this._weapon = object.weapon;
-    }
-    else
-    {                      
-      this._weapon = new Weapon(this);
-    }                     
+    this._maxVelocity = object._maxVelocity ? object._maxVelocity : 300;
+    this.maxHealth = object.maxHealth ? object.maxHealth : 1;
+    this.health = object.Health ? object.Health : 1;
+    this._weapon = object.weapon !== undefined ? Weapon.newWeapon(this, object.weapon.name) : Weapon.newWeapon(this);
+ 
 
   }
 
@@ -90,8 +81,8 @@ class Protagonist extends MapSprite {
       //this.mapState.gameApp.recorder.print();
       if(this.body.velocity === null)
       {
-        this.destroy();
-        //this.body.velocity = new Phaser.Point(0,-60);
+        this.kill();
+        this.body.velocity = new Phaser.Point(0,-60);
       }
     }
     else

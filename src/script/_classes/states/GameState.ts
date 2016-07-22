@@ -106,7 +106,7 @@ class GameState extends MapState {
 
     // Debugging
     this.gameApp.recorder.update();
-    if(this.joypad.a == true &&this.joypad.deltaA)
+    if(this.joypad.a == true && this.joypad.deltaA && this.objectType("protagonist").getTop() !== undefined)
     {
       this.objectType("protagonist").getTop().kill();
     }
