@@ -136,7 +136,7 @@ class GameState extends MapState {
 
   _bulletMeetsGrunt(bullet:Phaser.Sprite, grunt:Grunt) {
     grunt.gib();
-    grunt.kill();
+    // grunt.kill();
     bullet.kill();
   }
 

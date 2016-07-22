@@ -198,15 +198,15 @@
          "transparentcolor":"#ff00ff"
         }, 
         {
-         "columns":1,
+         "columns":7,
          "firstgid":9,
          "image":"..\/gfx\/polarbear_64x64.png",
          "imageheight":64,
-         "imagewidth":64,
+         "imagewidth":448,
          "margin":0,
          "name":"polarbear_64x64",
          "spacing":0,
-         "tilecount":1,
+         "tilecount":7,
          "tileheight":64,
          "tilewidth":64,
          "transparentcolor":"#ff00ff"
