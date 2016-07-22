@@ -2682,6 +2682,20 @@
          "tileheight":16,
          "tilewidth":16,
          "transparentcolor":"#ff00ff"
+        }, 
+        {
+         "columns":1,
+         "firstgid":23,
+         "image":"..\/gfx\/patrol_64x64.png",
+         "imageheight":64,
+         "imagewidth":64,
+         "margin":0,
+         "name":"patrol_64x64",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":64,
+         "tilewidth":64,
+         "transparentcolor":"#ff00ff"
         }],
  "tilewidth":32,
  "version":1,
