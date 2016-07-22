@@ -141,6 +141,18 @@
         }],
  "nextobjectid":115,
  "orientation":"orthogonal",
+ "properties":
+    {
+     "musicKey":"Twentyone",
+     "musicLoop":true,
+     "musicUrl":"..\/music\/AuditoryCheesecake_Twentyone.mp3"
+    },
+ "propertytypes":
+    {
+     "musicKey":"string",
+     "musicLoop":"bool",
+     "musicUrl":"file"
+    },
  "renderorder":"right-down",
  "tileheight":32,
  "tilesets":[

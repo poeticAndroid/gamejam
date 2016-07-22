@@ -20,10 +20,17 @@ class Grunt extends MapSprite {
   private _emitter:Phaser.Particles.Arcade.Emitter;
   private _gibTTL:number;
 
-  constructor(mapState:GameState, object:any) {
+  //Sound:
+  private _splat:Phaser.Sound;
+
+  constructor(public mapState:GameState, object:any) {
     super(mapState, object);
     this.moveAnchor(.5);
     this.animations.add("die", [1, 2, 3, 4, 5, 6], 15, false);
+
+    //SOUND
+    this.addSound();
+    
 
     // POSITION AND VELOCITY
     this._weapon = 0;
@@ -39,6 +46,19 @@ class Grunt extends MapSprite {
     this.maxHealth = 1;
     this.health = 1;
 
+  }
+
+  addSound() {
+    var rand = Math.random();
+    if (rand < 0.3) {
+    this._splat = this.mapState.add.audio('splat1');
+  }
+  else if (rand < 0.65) {
+    this._splat = this.mapState.add.audio('splat2');
+  }
+  else {
+    this._splat = this.mapState.add.audio('splat3');
+  }
   }
 
   update() 
@@ -86,6 +106,7 @@ class Grunt extends MapSprite {
     this._emitter.start(true, this._gibTTL,null,5);
     this.mapState.time.events.add(this._gibTTL*2, ()=>{this.destroyGibEmitter(); this.destroy();}, this);
     this.play("die", 10, false, true);
+    this._splat.play();
   }
 
 }
