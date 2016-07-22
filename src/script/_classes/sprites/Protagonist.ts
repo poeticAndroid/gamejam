@@ -37,7 +37,6 @@ class Protagonist extends MapSprite {
     else
     {
       this._ghostNr = null;
-      this.tint = 0x66ccff;
       joypad.start();
     }
 
@@ -87,7 +86,8 @@ class Protagonist extends MapSprite {
       //this.mapState.gameApp.recorder.print();
       if(this.body.velocity === null)
       {
-        this.body.velocity = new Phaser.Point(0,-60);
+        this.destroy();
+        //this.body.velocity = new Phaser.Point(0,-60);
       }
     }
     else

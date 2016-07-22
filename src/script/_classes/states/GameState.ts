@@ -102,7 +102,7 @@ class GameState extends MapState {
       //this.gameApp.recorder.printEntireRecord(0);
     }
 
-    this.game.physics.arcade.overlap(this.objectType("bullet"), this.objectType("grunt"), this._bulletMeetsGrunt, null, this);
+    //this.game.physics.arcade.overlap(this.objectType("bullet"), this.objectType("grunt"), this._bulletMeetsGrunt, null, this);
   }
 
   command(command:string, args:any):boolean {
