@@ -28,7 +28,7 @@ class Grunt extends MapSprite {
     // POSITION AND VELOCITY
     this._velocity = new Phaser.Point(0,0);
     this._weapon = 0;
-    this._gibTTL = 8000;
+    this._gibTTL = 1000;
 
 
 
@@ -106,8 +106,8 @@ class Grunt extends MapSprite {
   }
 
   destroyGibEmitter() {
-
-    this._emitter.destroy();
+    this._emitter.removeChildren();
+    this._emitter.kill();
 
   }
 
@@ -115,9 +115,9 @@ class Grunt extends MapSprite {
     this._dead = true;
     this._emitter = this.mapState.add.emitter(this.position.x, this.position.y);
     this._emitter.makeParticles('bullet_16x16');
+    this._emitter.setAlpha(1,0,8000, Phaser.Easing.Exponential.Out);
     this._emitter.start(true, this._gibTTL,null,5);
-    this._emitter.setAlpha(0,1,this._gibTTL);
-    this.mapState.time.events.add(this._gibTTL, this.destroyGibEmitter, this);
+    this.mapState.time.events.add(this._gibTTL*2, this.destroyGibEmitter, this);
     this.play("die", 15, false, true);
   }
 
