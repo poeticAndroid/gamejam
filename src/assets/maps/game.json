@@ -145,16 +145,16 @@
                  "y":7976
                 }, 
                 {
-                 "gid":9,
+                 "gid":15,
                  "height":64,
-                 "id":129,
+                 "id":130,
                  "name":"",
                  "rotation":0,
                  "type":"grunt",
                  "visible":true,
                  "width":64,
-                 "x":266,
-                 "y":9153
+                 "x":432,
+                 "y":9104
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -163,7 +163,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":130,
+ "nextobjectid":131,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
@@ -221,6 +221,20 @@
          "tilecount":7,
          "tileheight":64,
          "tilewidth":64,
+         "transparentcolor":"#ff00ff"
+        }, 
+        {
+         "columns":1,
+         "firstgid":22,
+         "image":"..\/gfx\/gore_16x16.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "margin":0,
+         "name":"gore_16x16",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":16,
+         "tilewidth":16,
          "transparentcolor":"#ff00ff"
         }],
  "tilewidth":32,
