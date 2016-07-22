@@ -2601,6 +2601,16 @@
         }],
  "nextobjectid":334,
  "orientation":"orthogonal",
+ "properties":
+    {
+     "musicKey":"Twentyone",
+     "musicLoop":true
+    },
+ "propertytypes":
+    {
+     "musicKey":"string",
+     "musicLoop":"bool"
+    },
  "renderorder":"right-down",
  "tileheight":32,
  "tilesets":[
