@@ -112,7 +112,7 @@ class GameState extends MapState {
     }
     else if(this.mapName == "win_map")
     {
-      this._ghostText = this.eng.add.text(300,300,"You died " + (this.gameApp.recorder.getGhostAmount() - 1).toString() + " times", {fill: "black"});
+      this._ghostText = this.eng.add.text(100,200,"You died " + (this.gameApp.recorder.getGhostAmount() - 1).toString() + " times", {fill: "black"});
     }
   }
 
