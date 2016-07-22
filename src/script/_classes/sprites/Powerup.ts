@@ -16,6 +16,8 @@ class Powerup extends MapSprite {
   constructor(public mapState:GameState, object:any) {
     super(mapState, object);
     this.moveAnchor(.5);
+    this.animations.add("glisten", [0, 1, 2, 3], 10, true);
+    this.play("glisten");
 
     // POSITION AND VELOCITY
     this._gibTTL = 3000;
