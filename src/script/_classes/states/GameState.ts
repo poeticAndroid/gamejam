@@ -3,9 +3,9 @@
 import GameApp       = require("../GameApp");
 import MapState      = require("../lib/MapState");
 import MapSprite     = require("../lib/MapSprite");
-
 import Protagonist   = require("../sprites/Protagonist");
 import Grunt         = require("../sprites/Grunt");
+import Patrol         = require("../sprites/Patrol");
 import Text          = require("../sprites/Text");
 
 import Recorder      = require("../lib/Recorder");
@@ -25,6 +25,7 @@ class GameState extends MapState {
     this.objectClasses["protagonist"] = Protagonist;
     this.objectClasses["grunt"] = Grunt;
     this.objectClasses["text"] = Text;
+    this.objectClasses["patrol"] = Patrol;
     this.joypad.mode = "rpg";
     this.recorder = this.gameApp.recorder;
   }
@@ -35,6 +36,7 @@ class GameState extends MapState {
     this.eng.load.audio("splat1", "./assets/sounds/splat1.mp3");
     this.eng.load.audio("splat2", "./assets/sounds/splat2.mp3");
     this.eng.load.audio("splat3", "./assets/sounds/splat3.mp3");
+    this.eng.load.audio("explosion1", "./assets/sounds/explosion1.wav");
     this.eng.load.image("font", "./assets/gfx/VictoriaBold.png");
   }
 
@@ -123,6 +125,7 @@ class GameState extends MapState {
   checkCollisions()
   {
     this.game.physics.arcade.overlap(this.objectType("bullet"), this.objectType("grunt"), this._bulletMeetsGrunt, (a:any, b:any)=>{ return a.alive && b.alive;}, this);
+    this.game.physics.arcade.overlap(this.objectType("bullet"), this.objectType("patrol"), this._bulletMeetsGrunt, (a:any, b:any)=>{ return a.alive && b.alive;}, this);
     this.game.physics.arcade.overlap(this.objectType("grunt"), this.objectType("protagonist"), this._gruntMeetsProtagonist, (a:any, b:any)=>{ return a.alive && b.alive;}, this);
   }
 

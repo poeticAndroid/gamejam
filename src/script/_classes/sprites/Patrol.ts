@@ -4,17 +4,20 @@ import GameState  = require("../states/GameState");
 import MapSprite = require("../lib/MapSprite");
 
 /**
- * Grunt class
+ * Patrol class
  */
 
-class Grunt extends MapSprite {
+class Patrol extends MapSprite {
   private _ghostNr:number;
   private _velocity:Phaser.Point;
   private _dead=false;
+  private _moving=false;
 
   // stats
   private _maxVelocity:number;
   private _weapon:any;
+  private _direction:number;
+  private _outOfBoundsCount:number;
 
   //Destroy emitter:
   private _emitter:Phaser.Particles.Arcade.Emitter;
@@ -26,12 +29,13 @@ class Grunt extends MapSprite {
   constructor(public mapState:GameState, object:any) {
     super(mapState, object);
     this.moveAnchor(.5);
-    this.animations.add("die", [1, 2, 3, 4, 5, 6], 15, false);
+    this.animations.add("walk", [0, 1], 5, true);
+    this.animations.add("die", [2, 3, 4, 5, 6], 15, false);
+    this.play("walk");
 
     //SOUND
     this.addSound();
     
-
     // POSITION AND VELOCITY
     this._weapon = 0;
     this._gibTTL = 1000;
@@ -42,9 +46,11 @@ class Grunt extends MapSprite {
     this.body.velocity = new Phaser.Point(0,0);
 
     // stats
-    this._maxVelocity = 120;
+    this._maxVelocity = 250;
     this.maxHealth = 1;
     this.health = 1;
+    this._direction = 1;
+    this._outOfBoundsCount = 3;
 
   }
 
@@ -63,7 +69,7 @@ class Grunt extends MapSprite {
 
   update() 
   {
-    if (!this.inCamera || this._dead) {
+    if ((!this.inCamera &&  !this._moving) || this._dead) {
       return;
     }
     // Calculates velocity and moves the protagonist
@@ -71,17 +77,25 @@ class Grunt extends MapSprite {
   }
 
   calculateVelocity()
-  {
-    // PLAYER CONTROLLED      
+  {    
     // Calculate velocity
-    var target = this.mapState.objectType("protagonist").getTop() !== undefined ? this.mapState.objectType("protagonist").getTop() : this;
-    this.body.velocity.set(target.position.x - this.position.x, target.position.y - this.position.y);
+    if (!this.inCamera) {
+      this._outOfBoundsCount--;
+      if (this._outOfBoundsCount < 0) {
+        this._direction = this._direction*-1;
+        this.scale.x = this.scale.x*-1;
+        this._outOfBoundsCount = 5;
+      }
+    }
+    this.body.velocity.set(this._direction, -.125);
     this.body.velocity = this.body.velocity.setMagnitude(this._maxVelocity);
   }
+  
 
   handleMovement()
   {
     // Calculate velocity
+    this._moving = true;
     this.calculateVelocity();
 
   }
@@ -110,4 +124,4 @@ class Grunt extends MapSprite {
   }
 
 }
-export = Grunt;
+export = Patrol;

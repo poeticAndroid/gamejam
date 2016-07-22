@@ -147,18 +147,6 @@
                 {
                  "gid":15,
                  "height":64,
-                 "id":130,
-                 "name":"",
-                 "rotation":0,
-                 "type":"grunt",
-                 "visible":true,
-                 "width":64,
-                 "x":432,
-                 "y":9104
-                }, 
-                {
-                 "gid":15,
-                 "height":64,
                  "id":131,
                  "name":"",
                  "rotation":0,
@@ -2591,6 +2579,18 @@
                  "width":64,
                  "x":136,
                  "y":704
+                }, 
+                {
+                 "gid":23,
+                 "height":64,
+                 "id":334,
+                 "name":"",
+                 "rotation":0,
+                 "type":"patrol",
+                 "visible":true,
+                 "width":64,
+                 "x":401,
+                 "y":9085
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2599,7 +2599,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":334,
+ "nextobjectid":337,
  "orientation":"orthogonal",
  "properties":
     {
@@ -2681,6 +2681,20 @@
          "tilecount":1,
          "tileheight":16,
          "tilewidth":16,
+         "transparentcolor":"#ff00ff"
+        }, 
+        {
+         "columns":7,
+         "firstgid":23,
+         "image":"..\/gfx\/patrol_64x64.png",
+         "imageheight":64,
+         "imagewidth":448,
+         "margin":0,
+         "name":"patrol_64x64",
+         "spacing":0,
+         "tilecount":7,
+         "tileheight":64,
+         "tilewidth":64,
          "transparentcolor":"#ff00ff"
         }],
  "tilewidth":32,
