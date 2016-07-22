@@ -150,11 +150,11 @@
                  "id":130,
                  "name":"",
                  "rotation":0,
-                 "type":"grunt",
+                 "type":"patrol",
                  "visible":true,
                  "width":64,
-                 "x":432,
-                 "y":9104
+                 "x":434,
+                 "y":8975
                 }, 
                 {
                  "gid":15,
