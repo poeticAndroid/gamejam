@@ -13492,12 +13492,14 @@
  "properties":
     {
      "musicKey":"Twentyone",
-     "musicLoop":true
+     "musicLoop":true,
+     "offstage":"top"
     },
  "propertytypes":
     {
      "musicKey":"string",
-     "musicLoop":"bool"
+     "musicLoop":"bool",
+     "offstage":"string"
     },
  "renderorder":"right-down",
  "tileheight":32,

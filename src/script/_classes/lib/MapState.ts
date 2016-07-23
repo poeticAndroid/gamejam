@@ -29,6 +29,7 @@ class MapState extends Phaser.State {
   constructor(public gameApp:GameApp, public mapName?:string, private _url?:string) {
     super();
     this.eng = gameApp.eng;
+    this._offStage = [];
     this.objectClasses = {
       "sprite": MapSprite,
       "button": MapButton
@@ -113,6 +114,7 @@ class MapState extends Phaser.State {
     this.buttonType = "button";
     this.focusedButton = -1;
     this.map = this.add.tilemap(this.mapName);
+    this._offstageMode = this.getProperty("offstage");
     for (tileset of this.mapData.tilesets) {
       this.map.addTilesetImage(tileset.name);
     }
@@ -138,7 +140,11 @@ class MapState extends Phaser.State {
         break;
         case "objectgroup":
           for (object of layer.objects) {
-            this.addObject(object, layer.name);
+            if (this._offstageMode) {
+              this.offstageObject(object, layer.name);
+            } else {
+              this.addObject(object, layer.name);
+            }
           };
         break;
       }
@@ -180,6 +186,21 @@ class MapState extends Phaser.State {
       }
       this.focusedButton = fb;
     }
+    var obj = this._offStage[this._offStage.length-1];
+    switch (this._offstageMode) {
+      case "left":
+        if (obj.x+obj.width > this.camera.x) this.addObject(this._offStage.pop());
+        break;
+      case "right":
+        if (obj.x-obj.width < this.camera.x+this.camera.width) this.addObject(this._offStage.pop());
+        break;
+      case "top":
+        if (obj.y+obj.height > this.camera.y) this.addObject(this._offStage.pop());
+        break;
+      case "bottom":
+        if (obj.y-obj.height < this.camera.y+this.camera.height) this.addObject(this._offStage.pop());
+        break;
+    }
     super.update();
   }
 
@@ -195,6 +216,31 @@ class MapState extends Phaser.State {
     } else if (this.objectClasses["sprite"] != null) {
       return this.objectTypes[type].add(new this.objectClasses["sprite"](this, object));
     }
+  }
+
+  offstageObject(object:any, layerName=object.layerName) {
+    var i:number, type = object.type || "sprite";
+    var place = this._offStage.length;
+    this.objectType(type, layerName);
+    object.layerName = layerName;
+    for (i=0;i<this._offStage.length;i++) {
+      switch (this._offstageMode) {
+        case "left":
+          if (this._offStage[i].x > object.x) place = i;
+          break;
+        case "right":
+          if (this._offStage[i].x < object.x) place = i;
+          break;
+        case "top":
+          if (this._offStage[i].y > object.y) place = i;
+          break;
+        case "bottom":
+          if (this._offStage[i].y < object.y) place = i;
+          break;
+      }
+      if (place < this._offStage.length) i = this._offStage.length;
+    }
+    this._offStage.splice(place, 0, object);
   }
 
   objectLayer(layerName:string) {
@@ -271,5 +317,12 @@ class MapState extends Phaser.State {
       }
     }
   }
+
+  /**
+    Privates
+  */
+
+  private _offStage:any[];
+  private _offstageMode:string;
 }
 export = MapState;
