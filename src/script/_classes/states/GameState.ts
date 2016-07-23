@@ -30,7 +30,7 @@ class GameState extends MapState {
     this.objectClasses["text"] = Text;
     this.objectClasses["patrol"] = Patrol;
     this.objectClasses["powerup"] = Powerup;
-    this.joypad.mode = "rpg";
+    this.joypad.mode = "legacy";
     this.recorder = this.gameApp.recorder;
   }
 
