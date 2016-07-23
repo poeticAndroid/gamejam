@@ -48,14 +48,14 @@ class Grunt extends MapSprite {
   addSound() {
     var rand = Math.random();
     if (rand < 0.3) {
-    this.sfx = this.mapState.add.audio('splat1');
-  }
-  else if (rand < 0.65) {
-    this.sfx = this.mapState.add.audio('splat2');
-  }
-  else {
-    this.sfx = this.mapState.add.audio('splat3');
-  }
+      this.sfx = this.mapState.add.audio('splat1');
+    }
+    else if (rand < 0.65) {
+      this.sfx = this.mapState.add.audio('splat2');
+    }
+    else {
+      this.sfx = this.mapState.add.audio('splat3');
+    }
   }
 
   update() 

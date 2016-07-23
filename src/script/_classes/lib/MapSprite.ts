@@ -5,7 +5,7 @@ import MapState = require("./MapState");
 /**
  * MapSprite class
  *
- * @date 07-06-2016
+ * @date 23-07-2016
  */
 
 class MapSprite extends Phaser.Sprite {
@@ -30,6 +30,7 @@ class MapSprite extends Phaser.Sprite {
     this.rotation = this.object.rotation * (Math.PI / 180);
     this.name = this.object.name;
 
+    this.autoCull = true;
     this.game.physics.enable(this);
     for ( key in this.object.properties ) {
       val = this.getProperty(key);

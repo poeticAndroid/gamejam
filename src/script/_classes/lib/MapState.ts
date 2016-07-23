@@ -10,7 +10,7 @@ import StorageFile = require("./StorageFile");
 /**
  * MapState class
  * 
- * @date 23-07-2016
+ * @date 24-07-2016
  */
 
 class MapState extends Phaser.State {
