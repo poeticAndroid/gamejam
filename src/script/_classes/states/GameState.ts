@@ -181,7 +181,7 @@ class GameState extends MapState {
       if(this._restarting > 2)
       {
         this.gameApp.trackEvent("died_"+(Math.round(this.camera.y/600)*10));
-        this.command("restart", null);
+        this.command("restart", []);
       }
     }
   }
