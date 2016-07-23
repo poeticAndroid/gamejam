@@ -212,7 +212,7 @@ class MapState extends Phaser.State {
     return this.objectTypes[type];
   }
 
-  command(command:string, args:any):boolean {
+  command(command:string, args:any=[]):boolean {
     var file:StorageFile;
     switch (command) {
       case "url":

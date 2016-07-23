@@ -181,12 +181,12 @@ class GameState extends MapState {
       if(this._restarting > 2)
       {
         this.gameApp.trackEvent("died_"+(Math.round(this.camera.y/600)*10));
-        this.command("restart", []);
+        this.command("restart");
       }
     }
   }
 
-  command(command:string, args:any):boolean {
+  command(command:string, args={}):boolean {
     switch (command) {
       case "noop":
         // code
