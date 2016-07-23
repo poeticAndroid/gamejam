@@ -179,6 +179,9 @@ class GameState extends MapState {
       this._restarting += this.game.time.physicsElapsed;
       if(this._restarting > 2)
       {
+        if (window["_paq"]) {
+          window["_paq"].push(['trackEvent', document.title, "died_"+(Math.round(this.camera.y/600)*10)]);
+        }
         this.game.state.restart();
       }
     }
