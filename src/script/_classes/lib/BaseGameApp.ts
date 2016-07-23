@@ -5,7 +5,7 @@ import StorageFile = require("./StorageFile");
 /**
  * BaseGameApp class
  * 
- * @date 06-07-2016
+ * @date 23-07-2016
  */
 
 class BaseGameApp {
@@ -181,6 +181,12 @@ class BaseGameApp {
         };
         document.body.addEventListener("touchstart", cb);
       }
+    }
+  }
+
+  trackEvent(event:string) {
+    if (window["_paq"]) {
+      window["_paq"].push(['trackEvent', document.title, event]);
     }
   }
 

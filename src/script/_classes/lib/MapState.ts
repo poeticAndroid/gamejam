@@ -146,9 +146,7 @@ class MapState extends Phaser.State {
     if (this.getProperty("musicKey")) {
       this.gameApp.playMusic(this.getProperty("musicKey"), this.getProperty("musicLoop"));
     }
-    if (window["_paq"]) {
-      window["_paq"].push(['trackEvent', document.title, this.key]);
-    }
+    this.gameApp.trackEvent(this.key);
   };
 
   update() {

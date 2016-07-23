@@ -113,6 +113,7 @@ class GameState extends MapState {
     else if(this.mapName == "win_map")
     {
       this._ghostText = this.eng.add.text(100,200,"You died " + (this.gameApp.recorder.getGhostAmount() - 1).toString() + " times", {fill: "black"});
+      this.gameApp.trackEvent("won_"+(this.gameApp.recorder.getGhostAmount() - 1));
     }
   }
 
@@ -179,10 +180,8 @@ class GameState extends MapState {
       this._restarting += this.game.time.physicsElapsed;
       if(this._restarting > 2)
       {
-        if (window["_paq"]) {
-          window["_paq"].push(['trackEvent', document.title, "died_"+(Math.round(this.camera.y/600)*10)]);
-        }
-        this.game.state.restart();
+        this.gameApp.trackEvent("died_"+(Math.round(this.camera.y/600)*10));
+        this.command("restart", null);
       }
     }
   }
