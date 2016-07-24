@@ -23,6 +23,7 @@ class Grunt extends MapSprite {
   constructor(public mapState:GameState, object:any) {
     super(mapState, object);
     this.moveAnchor(.5);
+    this.body.setSize(32, 64, 16, 0);
     this.animations.add("die", [1, 2, 3, 4, 5, 6], 15, false);
 
     //SOUND

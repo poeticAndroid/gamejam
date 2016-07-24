@@ -139,7 +139,7 @@ class GameState extends MapState {
       this.timeRelatedStuff()
 
       // Update ghost text
-      this._ghostText.text = "Ghosts: " + (this.gameApp.recorder.getGhostAmount() - 1).toString();
+      this._ghostText.text = "Deaths: " + (this.gameApp.recorder.getGhostAmount() - 1).toString();
 
 
       // Debugging
