@@ -19,6 +19,7 @@ class GameState extends MapState {
   public recorder : Recorder;
   public advanceSpeed : number;
   private _timeText : Phaser.Text;
+  private _bestTimeText : Phaser.Text;
   private _ghostText : Phaser.Text;
   private _restarting : number;
 
@@ -62,8 +63,12 @@ class GameState extends MapState {
       this._timeText = this.eng.add.text(10,10,this._timeInRoom.toString(), {fill: "white"});
       this._timeText.fixedToCamera = true;
 
+      // Best time
+      this._bestTimeText = this.eng.add.text(10,34, "Best time: "+this.gameApp.saveFile.get("bestTime"), {fill: "white"});
+      this._bestTimeText.fixedToCamera = true;
+
       // Ghost amount
-      this._ghostText = this.eng.add.text(10,34,this._timeInRoom.toString(), {fill: "white"});
+      this._ghostText = this.eng.add.text(10,58,this._timeInRoom.toString(), {fill: "white"});
       this._ghostText.fixedToCamera = true;
 
 
@@ -150,6 +155,7 @@ class GameState extends MapState {
       // GAME OVER, YOU WIN. HACK!
       if(this.camera.y == 0)
       {
+        this.gameApp.saveFile.set("bestTime", null);
         this.gameApp.switchTo("win_state");
         // YOU WIN!
       }
@@ -181,6 +187,9 @@ class GameState extends MapState {
       if(this._restarting > 2)
       {
         this.gameApp.trackEvent("died_"+(Math.round(this.camera.y/600)*10));
+        if (this.gameApp.saveFile.get("bestTime") == null || this.gameApp.saveFile.get("bestTime") > Math.floor(this.camera.y / 60)) {
+          this.gameApp.saveFile.set("bestTime", Math.floor(this.camera.y / 60));
+        }
         this.command("restart");
       }
     }
