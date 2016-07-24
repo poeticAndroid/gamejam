@@ -29,7 +29,6 @@ class MapState extends Phaser.State {
   constructor(public gameApp:GameApp, public mapName?:string, private _url?:string) {
     super();
     this.eng = gameApp.eng;
-    this._offStage = [];
     this.objectClasses = {
       "sprite": MapSprite,
       "button": MapButton
@@ -114,6 +113,7 @@ class MapState extends Phaser.State {
     this.buttonType = "button";
     this.focusedButton = -1;
     this.map = this.add.tilemap(this.mapName);
+    this._offStageQueue = [];
     this._offstageMode = this.getProperty("offstage");
     for (tileset of this.mapData.tilesets) {
       this.map.addTilesetImage(tileset.name);
@@ -186,19 +186,19 @@ class MapState extends Phaser.State {
       }
       this.focusedButton = fb;
     }
-    var obj = this._offStage[this._offStage.length-1];
+    var obj = this._offStageQueue[this._offStageQueue.length-1];
     switch (this._offstageMode) {
       case "left":
-        if (obj.x+obj.width > this.camera.x) this.addObject(this._offStage.pop());
+        if (obj.x+obj.width > this.camera.x) this.addObject(this._offStageQueue.pop());
         break;
       case "right":
-        if (obj.x-obj.width < this.camera.x+this.camera.width) this.addObject(this._offStage.pop());
+        if (obj.x-obj.width < this.camera.x+this.camera.width) this.addObject(this._offStageQueue.pop());
         break;
       case "top":
-        if (obj.y+obj.height > this.camera.y) this.addObject(this._offStage.pop());
+        if (obj.y+obj.height > this.camera.y) this.addObject(this._offStageQueue.pop());
         break;
       case "bottom":
-        if (obj.y-obj.height < this.camera.y+this.camera.height) this.addObject(this._offStage.pop());
+        if (obj.y-obj.height < this.camera.y+this.camera.height) this.addObject(this._offStageQueue.pop());
         break;
     }
     super.update();
@@ -220,27 +220,27 @@ class MapState extends Phaser.State {
 
   offstageObject(object:any, layerName=object.layerName) {
     var i:number, type = object.type || "sprite";
-    var place = this._offStage.length;
+    var place = this._offStageQueue.length;
     this.objectType(type, layerName);
     object.layerName = layerName;
-    for (i=0;i<this._offStage.length;i++) {
+    for (i=0;i<this._offStageQueue.length;i++) {
       switch (this._offstageMode) {
         case "left":
-          if (this._offStage[i].x > object.x) place = i;
+          if (this._offStageQueue[i].x > object.x) place = i;
           break;
         case "right":
-          if (this._offStage[i].x < object.x) place = i;
+          if (this._offStageQueue[i].x < object.x) place = i;
           break;
         case "top":
-          if (this._offStage[i].y > object.y) place = i;
+          if (this._offStageQueue[i].y > object.y) place = i;
           break;
         case "bottom":
-          if (this._offStage[i].y < object.y) place = i;
+          if (this._offStageQueue[i].y < object.y) place = i;
           break;
       }
-      if (place < this._offStage.length) i = this._offStage.length;
+      if (place < this._offStageQueue.length) i = this._offStageQueue.length;
     }
-    this._offStage.splice(place, 0, object);
+    this._offStageQueue.splice(place, 0, object);
   }
 
   objectLayer(layerName:string) {
@@ -322,7 +322,7 @@ class MapState extends Phaser.State {
     Privates
   */
 
-  private _offStage:any[];
+  private _offStageQueue:any[];
   private _offstageMode:string;
 }
 export = MapState;
