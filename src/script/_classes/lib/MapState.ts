@@ -187,19 +187,21 @@ class MapState extends Phaser.State {
       this.focusedButton = fb;
     }
     var obj = this._offStageQueue[this._offStageQueue.length-1];
-    switch (this._offstageMode) {
-      case "left":
-        if (obj.x+obj.width > this.camera.x) this.addObject(this._offStageQueue.pop());
-        break;
-      case "right":
-        if (obj.x-obj.width < this.camera.x+this.camera.width) this.addObject(this._offStageQueue.pop());
-        break;
-      case "top":
-        if (obj.y+obj.height > this.camera.y) this.addObject(this._offStageQueue.pop());
-        break;
-      case "bottom":
-        if (obj.y-obj.height < this.camera.y+this.camera.height) this.addObject(this._offStageQueue.pop());
-        break;
+    if (obj) {
+      switch (this._offstageMode) {
+        case "left":
+          if (obj.x+obj.width > this.camera.x) this.addObject(this._offStageQueue.pop());
+          break;
+        case "right":
+          if (obj.x-obj.width < this.camera.x+this.camera.width) this.addObject(this._offStageQueue.pop());
+          break;
+        case "top":
+          if (obj.y+obj.height > this.camera.y) this.addObject(this._offStageQueue.pop());
+          break;
+        case "bottom":
+          if (obj.y-obj.height < this.camera.y+this.camera.height) this.addObject(this._offStageQueue.pop());
+          break;
+      }
     }
     super.update();
   }
