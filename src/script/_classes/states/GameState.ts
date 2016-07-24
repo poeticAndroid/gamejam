@@ -118,6 +118,12 @@ class GameState extends MapState {
     else if(this.mapName == "win_map")
     {
       this._ghostText = this.eng.add.text(100,200,"You died " + (this.gameApp.recorder.getGhostAmount() - 1).toString() + " times", {fill: "black"});
+      if (this.gameApp.saveFile.get("bestDeaths") == null || this.gameApp.saveFile.get("bestDeaths") > (this.gameApp.recorder.getGhostAmount() - 1)) {
+        if (this.gameApp.saveFile.get("bestDeaths") != null) {
+          this._bestTimeText = this.eng.add.text(100,224, "That's a new record! :)", {fill: "black"});
+        }
+        this.gameApp.saveFile.set("bestDeaths", this.gameApp.recorder.getGhostAmount() - 1);
+      }
       this.gameApp.trackEvent("won_"+(this.gameApp.recorder.getGhostAmount() - 1));
     }
   }
