@@ -69,13 +69,13 @@ namespace Weapon {
       this._weapon.bulletKillDistance = 0;
       this._weapon.bulletSpeed = 0;
       this._weapon.fireRate = 0;
-      this._weapon.trackSprite(prot, 14, 0);
+      this._weapon.trackSprite(prot, 0, -32);
       this._weapon.bulletAngleOffset = 0;
     }
 
     shoot()
     {
-      this._weapon.fire(this.prot);
+      this._weapon.fire(null);
     }
   }
 
