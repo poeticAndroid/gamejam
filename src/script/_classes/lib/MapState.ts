@@ -10,7 +10,7 @@ import StorageFile = require("./StorageFile");
 /**
  * MapState class
  * 
- * @date 24-07-2016
+ * @date 25-07-2016
  */
 
 class MapState extends Phaser.State {
@@ -113,6 +113,7 @@ class MapState extends Phaser.State {
     this.buttonType = "button";
     this.focusedButton = -1;
     this.map = this.add.tilemap(this.mapName);
+    this._parallaxLayers = [];
     this._offStageQueue = [];
     this._offstageMode = this.getProperty("offstage");
     for (tileset of this.mapData.tilesets) {
@@ -130,6 +131,10 @@ class MapState extends Phaser.State {
             this.layers[layer.name].tilePosition.set(layer.offsetx, layer.offsety);
           } else {
             this.layers[layer.name] = this.add.sprite(layer.offsetx, layer.offsety, this.mapName + "_" + layer.name);
+          }
+          if (layer.properties && parseFloat(layer.properties.parallax)) {
+            this.layers[layer.name]["parallax"] = parseFloat(layer.properties.parallax);
+            this._parallaxLayers.push(this.layers[layer.name]);
           }
           this.layers[layer.name].alpha = layer.opacity;
         break;
@@ -204,6 +209,14 @@ class MapState extends Phaser.State {
       }
     }
     super.update();
+  }
+
+  render() {
+    var layer:Phaser.Sprite;
+    for (layer of this._parallaxLayers) {
+      layer.position.set(this.camera.x*layer["parallax"], this.camera.y*layer["parallax"]);
+    }
+    super.render();
   }
 
   shutdown() {
@@ -326,5 +339,6 @@ class MapState extends Phaser.State {
 
   private _offStageQueue:any[];
   private _offstageMode:string;
+  private _parallaxLayers:Phaser.Sprite[];
 }
 export = MapState;

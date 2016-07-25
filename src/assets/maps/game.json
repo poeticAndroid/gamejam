@@ -3,15 +3,59 @@
  "layers":[
         {
          "height":300,
-         "image":"..\/gfx\/starfield.png",
-         "name":"background",
+         "image":"..\/gfx\/starfield_far.png",
+         "name":"background_far",
          "opacity":1,
          "properties":
             {
+             "parallax":0.9,
              "tiled":true
             },
          "propertytypes":
             {
+             "parallax":"float",
+             "tiled":"bool"
+            },
+         "type":"imagelayer",
+         "visible":true,
+         "width":30,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "height":300,
+         "image":"..\/gfx\/starfield_middle.png",
+         "name":"background_middle",
+         "opacity":1,
+         "properties":
+            {
+             "parallax":0.5,
+             "tiled":true
+            },
+         "propertytypes":
+            {
+             "parallax":"float",
+             "tiled":"bool"
+            },
+         "type":"imagelayer",
+         "visible":true,
+         "width":30,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "height":300,
+         "image":"..\/gfx\/starfield_near.png",
+         "name":"background_near",
+         "opacity":1,
+         "properties":
+            {
+             "parallax":0.1,
+             "tiled":true
+            },
+         "propertytypes":
+            {
+             "parallax":"float",
              "tiled":"bool"
             },
          "type":"imagelayer",

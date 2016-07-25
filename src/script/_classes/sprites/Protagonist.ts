@@ -227,7 +227,7 @@ class Protagonist extends MapSprite {
       this.play("die", 10, false, true);
       if (this.sfx != undefined) {
         this.playSound();
-        this._backgroundSprite = this.mapState.layers['background'];
+        this._backgroundSprite = this.mapState.layers['background_near'];
         var customUniforms = {
         iChannel0: { type: 'sampler2D', value: this._backgroundSprite, textureData: { repeat: true } }
         };
