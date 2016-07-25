@@ -2,10 +2,45 @@
  "height":14,
  "layers":[
         {
+         "height":14,
+         "image":"..\/gfx\/title_screen.png",
+         "name":"background",
+         "opacity":1,
+         "type":"imagelayer",
+         "visible":true,
+         "width":25,
+         "x":0,
+         "y":0
+        }, 
+        {
          "draworder":"index",
          "height":14,
          "name":"objects",
          "objects":[
+                {
+                 "gid":6,
+                 "height":16,
+                 "id":79,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":384,
+                 "x":256,
+                 "y":184
+                }, 
+                {
+                 "gid":6,
+                 "height":16,
+                 "id":80,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":384,
+                 "x":256,
+                 "y":264
+                }, 
                 {
                  "gid":1,
                  "height":64,
@@ -169,26 +204,6 @@
                  "y":344
                 }, 
                 {
-                 "gid":7,
-                 "height":32,
-                 "id":76,
-                 "name":"",
-                 "properties":
-                    {
-                     "enable":false
-                    },
-                 "propertytypes":
-                    {
-                     "enable":"bool"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":176,
-                 "y":192
-                }, 
-                {
                  "gid":8,
                  "height":32,
                  "id":74,
@@ -202,11 +217,31 @@
                      "enable":"bool"
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"icon",
                  "visible":true,
                  "width":32,
                  "x":176,
                  "y":272
+                }, 
+                {
+                 "gid":7,
+                 "height":32,
+                 "id":76,
+                 "name":"",
+                 "properties":
+                    {
+                     "enable":false
+                    },
+                 "propertytypes":
+                    {
+                     "enable":"bool"
+                    },
+                 "rotation":0,
+                 "type":"icon",
+                 "visible":true,
+                 "width":32,
+                 "x":176,
+                 "y":192
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -215,7 +250,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":79,
+ "nextobjectid":81,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
