@@ -3,7 +3,7 @@
 /*
   joypad module for unified game controls
 
-  @date 02-06-2016
+  @date 25-07-2016
  */
 
 interface JoyTouch {
@@ -273,16 +273,16 @@ module joypad {
   function _onKeyUp(e:KeyboardEvent) {
     switch (_keyMap[e.keyCode]) {
       case "left":
-        joypad.x = 0;
+        joypad.x = Math.max(joypad.x, 0);
         break;
       case "right":
-        joypad.x = 0;
+        joypad.x = Math.min(joypad.x, 0);
         break;
       case "up":
-        joypad.y = 0;
+        joypad.y = Math.max(joypad.y, 0);
         break;
       case "down":
-        joypad.y = 0;
+        joypad.y = Math.min(joypad.y, 0);
         break;
       case "a":
         joypad.a = false;
