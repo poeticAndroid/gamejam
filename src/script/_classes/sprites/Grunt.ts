@@ -112,5 +112,10 @@ class Grunt extends MapSprite {
     this.playSound();
   }
 
+  kill() {
+    this.destroy();
+    return this;
+  }
+
 }
 export = Grunt;

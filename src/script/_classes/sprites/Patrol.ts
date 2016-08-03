@@ -125,5 +125,10 @@ class Patrol extends MapSprite {
     this.playSound();
   }
 
+  kill() {
+    this.destroy();
+    return this;
+  }
+
 }
 export = Patrol;
