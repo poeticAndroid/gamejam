@@ -250,6 +250,9 @@ class GameState extends MapState {
 
   _gruntMeetsProtagonist(grunt:Grunt, protagonist:Protagonist) {
     protagonist.kill();
+    if (this.objectType("protagonist").getTop() === protagonist) {
+      this.fade(0, 1, 2000);
+    }
   }
 
   _ProtagonistMeetsPowerup(protagonist:Protagonist, powerup:Powerup) {

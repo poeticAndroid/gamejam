@@ -10,7 +10,7 @@ import StorageFile = require("./StorageFile");
 /**
  * MapState class
  * 
- * @date 25-07-2016
+ * @date 10-08-2016
  */
 
 class MapState extends Phaser.State {
@@ -157,6 +157,7 @@ class MapState extends Phaser.State {
     if (this.getProperty("musicKey")) {
       this.gameApp.playMusic(this.getProperty("musicKey"), this.getProperty("musicLoop"));
     }
+    this.fadeIn();
     this.gameApp.trackEvent(this.key);
   };
 
@@ -332,6 +333,29 @@ class MapState extends Phaser.State {
       }
     }
   }
+
+  fade(from:number, to:number, duration:number, cb?:Function) {
+    var g = this.eng.add.graphics(0, 0);
+    g.alpha = from;
+    g.fixedToCamera = true;
+    g.beginFill(0, 1);
+    g.drawRect(0, 0, this.eng.stage.width, this.eng.stage.height);
+    g.endFill();
+    var t = this.eng.add.tween(g).to({alpha:to}, duration, null, true);
+    t.onComplete.add(function(){
+      cb && cb();
+      if (to == 0) g.destroy();
+    }, this);
+  }
+
+  fadeIn(cb?:Function) {
+    this.fade(1, 0, 512, cb);
+  }
+
+  fadeOut(cb?:Function) {
+    this.fade(0, 1, 512, cb);
+  }
+
 
   /**
     Privates

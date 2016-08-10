@@ -5,7 +5,7 @@ import StorageFile = require("./StorageFile");
 /**
  * BaseGameApp class
  * 
- * @date 23-07-2016
+ * @date 10-08-2016
  */
 
 class BaseGameApp {
@@ -69,7 +69,7 @@ class BaseGameApp {
       state = this.history[this.history.length-1];
     }
     if (state !== this.eng.state.current) {
-      this.eng.state.start(state);
+      this._fadeToState(state);
     }
   }
 
@@ -229,6 +229,17 @@ class BaseGameApp {
 
   private _onResume() {
     if (this.music && this.prefs.get("music.enabled")) this.music.play();
+  }
+
+  private _fadeToState(state=this.eng.state.current) {
+    var f = this.eng.state.getCurrentState();
+    if (f && f["fadeOut"]) {
+      f["fadeOut"](()=>{
+        this.eng.state.start(state);
+      })
+    } else {
+      this.eng.state.start(state);
+    }
   }
 
 }
