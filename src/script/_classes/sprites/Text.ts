@@ -14,11 +14,11 @@ class Text extends MapSprite {
 
   constructor(mapState:MapState, object:any) {
     super(mapState, object);
-    this.scale.set(this.getProperty("scale")||1);
+    this.scale.set(this.properties["scale"]||1);
     this.print = this.game.add.retroFont("font", 32, 32, Phaser.RetroFont.TEXT_SET1.trim(), 96, 4, 4, 4, 4);
     this.print.autoUpperCase = false;
     this.print.multiLine = true;
-    if (this.getProperty("center")) {
+    if (this.properties["center"]) {
       this.print.align = Phaser.RetroFont.ALIGN_CENTER;
     }
     this.setTexture(this.print);
@@ -30,21 +30,21 @@ class Text extends MapSprite {
   update() {
     super.update();
     if (joypad.device !== this.device) {
-      var text = this.getProperty("text");
+      var text = this.properties["text"];
       if (typeof text === "string") {
-        this.print.text = this.wordWrap(text, this.getProperty("cols"));
+        this.print.text = this.wordWrap(text, this.properties["cols"]);
       } else {
         switch (joypad.device) {
           case "touch":
-            this.print.text = this.wordWrap(text[1], this.getProperty("cols"));
+            this.print.text = this.wordWrap(text[1], this.properties["cols"]);
             break;
           
           case "gamepad":
-            this.print.text = this.wordWrap(text[2], this.getProperty("cols"));
+            this.print.text = this.wordWrap(text[2], this.properties["cols"]);
             break;
           
           default:
-            this.print.text = this.wordWrap(text[0], this.getProperty("cols"));
+            this.print.text = this.wordWrap(text[0], this.properties["cols"]);
             break;
         }
       }

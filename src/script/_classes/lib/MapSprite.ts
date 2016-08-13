@@ -5,11 +5,12 @@ import MapState = require("./MapState");
 /**
  * MapSprite class
  *
- * @date 07-06-2016
+ * @date 13-08-2016
  */
 
 class MapSprite extends Phaser.Sprite {
   public sfx: Phaser.Sound;
+  public properties:any;
 
   constructor(public mapState:MapState, public object:any) {
     super(mapState.game, object.x, object.y);
@@ -18,6 +19,10 @@ class MapSprite extends Phaser.Sprite {
         val:any,
         subkey:string;
     if (this.object.gid != null) {
+      this.object.flipH = !!(this.object.gid & 0x80000000);
+      this.object.flipV = !!(this.object.gid & 0x40000000);
+      this.object.flipD = !!(this.object.gid & 0x20000000);
+      this.object.gid  &= ~0xE0000000;
       for (tileset of this.mapState.mapData.tilesets) {
         if (tileset.firstgid <= this.object.gid) {
           this.loadTexture(tileset.name, this.object.gid - tileset.firstgid);
@@ -27,24 +32,19 @@ class MapSprite extends Phaser.Sprite {
     }
     this.width = this.object.width;
     this.height = this.object.height;
+    if (this.object.flipH) {
+      this.scale.x *= -1;
+    }
+    if (this.object.flipV) {
+      this.scale.y *= -1;
+    }
     this.rotation = this.object.rotation * (Math.PI / 180);
     this.name = this.object.name;
+    this.visible = this.object.visible;
 
     this.game.physics.enable(this);
-    for ( key in this.object.properties ) {
-      val = this.getProperty(key);
-      if (this.body[key] != null) {
-        if ( val instanceof Array ) {
-          this.body[key].set.apply(this.body[key], val);
-        } else if ( val instanceof Object ) {
-          for (subkey in val) {
-            this.body[key][subkey] = val[subkey];
-          }
-        } else {
-          this.body[key] = val;
-        }
-      }
-    }
+    this._decodeProperties();
+    this._mergeObjects(this.properties, this);
   }
 
   moveAnchor(x:number, y?:number) {
@@ -55,19 +55,48 @@ class MapSprite extends Phaser.Sprite {
     this.position.y += this.height * this.anchor.y;
   }
 
-  getProperty(key:string) {
+  playSound(marker?: string, position?: number, loop?: boolean, forceRestart?: boolean) {
+    if (this.mapState.gameApp.prefs.data["sfx"]["enabled"]) {
+      this.sfx.play(marker, position, this.mapState.gameApp.prefs.data["sfx"]["volume"], loop, forceRestart);
+    }
+  }
+
+  /*
+    privates
+  */
+
+  private _decodeProperties() {
+    var key:string;
+    this.properties = {};
     if (this.object.properties) {
-      try {
-        return JSON.parse(this.object.properties[key]);
-      } catch(err) {
-        return this.object.properties[key];
+      for (key in this.object.properties) {
+        try {
+          this.properties[key] = JSON.parse(this.object.properties[key]);
+        } catch(err) {
+          this.properties[key] = this.object.properties[key];
+        }
       }
     }
   }
 
-  playSound(marker?: string, position?: number, loop?: boolean, forceRestart?: boolean) {
-    if (this.mapState.gameApp.prefs.data["sfx"]["enabled"]) {
-      this.sfx.play(marker, position, this.mapState.gameApp.prefs.data["sfx"]["volume"], loop, forceRestart);
+  private _mergeObjects(from:Object, to:Object) {
+    var key:string;
+    for (key in from) {
+      if (typeof from[key] === typeof to[key]) {
+        if (from[key] instanceof Array && to[key] instanceof Array) {
+          to[key].splice(to[key].length, 0, ...from[key]);
+        } else if (typeof to[key] === "object") {
+          this._mergeObjects(from[key], to[key]);
+        } else {
+          to[key] = from[key];
+        }
+      } else if (typeof to[key] === "function") {
+        if (from[key] instanceof Array) {
+          to[key].apply(to, from[key]);
+        } else {
+          to[key].call(to, from[key]);
+        }
+      }
     }
   }
 }
