@@ -2,15 +2,17 @@
 "use strict";
 import MapState     = require("./MapState");
 import StorageFile  = require("./StorageFile");
+import MapUtils     = require("./MapUtils");
 
 
 /**
  * MapButton class
  *
- * @date 07-06-2016
+ * @date 14-08-2016
  */
 
 class MapButton extends Phaser.Button {
+  public properties:any;
   public command:string;
   public arguments:any;
   public file:StorageFile;
@@ -19,31 +21,21 @@ class MapButton extends Phaser.Button {
 
   constructor(public mapState:MapState, public object:any) {
     super(mapState.game, object.x, object.y);
-    var tileset:any,
-        key:string,
-        val:any,
-        subkey:string;
-    if (this.object.gid != null) {
-      for (tileset of this.mapState.mapData.tilesets) {
-        if (tileset.firstgid <= this.object.gid) {
-          this._firstFrame = this.object.gid - tileset.firstgid;
-          this.loadTexture(tileset.name, this._firstFrame);
-        }
-      }
-      this.anchor.set(0, 1);
-    }
-    this.width = this.object.width;
-    this.height = this.object.height;
-    this.rotation = this.object.rotation * (Math.PI / 180);
-    this.name = this.object.name;
+    var val:any;
+    MapUtils.applyTexture(this, object);
+    MapUtils.applyPosition(this, object);
+    this._firstFrame = <number>this.frame;
 
-    this.command = this.getProperty("command");
-    this.arguments = this.getProperty("arguments");
+    this.properties = MapUtils.decodeProperties(object.properties, {});
+    MapUtils.mergeObjects(this.properties, this);
+
+    this.command = this.properties["command"];
+    this.arguments = this.properties["arguments"];
     if (typeof this.arguments !== "object") {
       this.arguments = [this.arguments];
     }
 
-    if (this.getProperty("autofocus")) {
+    if (this.properties["autofocus"]) {
       mapState.buttonType = this.object.type;
       val = mapState.objectTypes[this.mapState.buttonType].length;
       setTimeout((function(){
@@ -156,16 +148,6 @@ class MapButton extends Phaser.Button {
         this.blur();
       } else {
         this.focus();
-      }
-    }
-  }
-
-  getProperty(key: string) {
-    if (this.object.properties) {
-      try {
-        return JSON.parse(this.object.properties[key]);
-      } catch (err) {
-        return this.object.properties[key];
       }
     }
   }

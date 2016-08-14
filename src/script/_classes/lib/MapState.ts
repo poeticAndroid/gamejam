@@ -5,15 +5,17 @@ import MapSprite   = require("./MapSprite");
 import MapButton   = require("./MapButton");
 import joypad      = require("./joypad");
 import StorageFile = require("./StorageFile");
+import MapUtils    = require("./MapUtils");
 
 
 /**
  * MapState class
  * 
- * @date 10-08-2016
+ * @date 14-08-2016
  */
 
 class MapState extends Phaser.State {
+  public properties:any;
   public eng:Phaser.Game;
   public objectClasses:Object;
   public loaded:boolean;
@@ -86,6 +88,7 @@ class MapState extends Phaser.State {
     url = this.eng.cache.getTilemapData(this.mapName).url;
     this.mapFolder = url.substr(0, url.lastIndexOf("/") + 1);
     this.mapData = this.eng.cache.getTilemapData(this.mapName).data;
+    this.properties = MapUtils.decodeProperties(this.mapData.properties);
     for (tileset of this.mapData.tilesets) {
       this.eng.load.spritesheet(tileset.name, this.mapFolder + tileset.image, tileset.tilewidth, tileset.tileheight, tileset.tilecount, tileset.margin, tileset.spacing);
     }
@@ -94,15 +97,16 @@ class MapState extends Phaser.State {
         this.eng.load.image(this.mapName + "_" + layer.name, this.mapFolder + layer.image);
       }
     }
-    if (this.getProperty("musicKey") && this.getProperty("musicUrl")) {
-      this.gameApp.loadMusic(this.getProperty("musicKey"), this.mapFolder + this.getProperty("musicUrl"));
+    if (this.properties["musicKey"] && this.properties["musicUrl"]) {
+      this.gameApp.loadMusic(this.properties["musicKey"], this.mapFolder + this.properties["musicUrl"]);
     }
   };
 
   create() {
     var layer:any,
         object:any,
-        tileset:any;
+        tileset:any,
+        properties:any;
     if (!this.mapName) { return; }
     this.world.removeChildren();
     this.game.canvas.style.cursor = "inherit";
@@ -115,7 +119,7 @@ class MapState extends Phaser.State {
     this.map = this.add.tilemap(this.mapName);
     this._parallaxLayers = [];
     this._offStageQueue = [];
-    this._offstageMode = this.getProperty("offstage");
+    this._offstageMode = this.properties["offstage"];
     for (tileset of this.mapData.tilesets) {
       this.map.addTilesetImage(tileset.name);
     }
@@ -124,24 +128,27 @@ class MapState extends Phaser.State {
       this.map.heightInPixels
     );
     for (layer of this.mapData.layers) {
+      properties = MapUtils.decodeProperties(layer.properties);
       switch (layer.type) {
         case "imagelayer":
-          if (layer.properties && JSON.parse(layer.properties.tiled)) {
+          if (properties.tiled) {
             this.layers[layer.name] = this.add.tileSprite(0, 0, this.world.width, this.world.height, this.mapName + "_" + layer.name);
             this.layers[layer.name].tilePosition.set(layer.offsetx, layer.offsety);
           } else {
             this.layers[layer.name] = this.add.sprite(layer.offsetx, layer.offsety, this.mapName + "_" + layer.name);
           }
-          if (layer.properties && parseFloat(layer.properties.parallax)) {
-            this.layers[layer.name]["parallax"] = parseFloat(layer.properties.parallax);
+          if (properties.parallax) {
+            this.layers[layer.name]["parallax"] = properties.parallax;
             this._parallaxLayers.push(this.layers[layer.name]);
           }
           this.layers[layer.name].alpha = layer.opacity;
+          MapUtils.mergeObjects(properties, this.layers[layer.name]);
         break;
         case "tilelayer":
           this.map.setCollisionByExclusion([]);
           this.layers[layer.name] = this.map.createLayer(layer.name);
           // this.layers[layer.name].resizeWorld();
+          MapUtils.mergeObjects(properties, this.layers[layer.name]);
         break;
         case "objectgroup":
           for (object of layer.objects) {
@@ -154,8 +161,8 @@ class MapState extends Phaser.State {
         break;
       }
     }
-    if (this.getProperty("musicKey")) {
-      this.gameApp.playMusic(this.getProperty("musicKey"), this.getProperty("musicLoop"));
+    if (this.properties["musicKey"]) {
+      this.gameApp.playMusic(this.properties["musicKey"], this.properties["musicLoop"]);
     }
     this.fadeIn();
     this.gameApp.trackEvent(this.key);
@@ -318,20 +325,6 @@ class MapState extends Phaser.State {
         return false;
     }
     return true;
-  }
-
-  getProperty(key: string, ifUndefined?:any) {
-    if (this.mapData.properties) {
-      if (this.mapData.properties[key] === undefined) {
-        return ifUndefined;
-      } else {
-        try {
-          return JSON.parse(this.mapData.properties[key]);
-        } catch (err) {
-          return this.mapData.properties[key];
-        }
-      }
-    }
   }
 
   fade(from:number, to:number, duration:number, cb?:Function) {
