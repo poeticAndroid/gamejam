@@ -28,7 +28,7 @@ class GameState extends MapState {
     this.eng.antialias = false;
     this.objectClasses["protagonist"] = Protagonist;
     this.objectClasses["grunt"] = Grunt;
-    this.objectClasses["text"] = Text;
+    this.objectClasses["8bitText"] = Text;
     this.objectClasses["patrol"] = Patrol;
     this.objectClasses["powerup"] = Powerup;
     this.joypad.mode = "legacy";

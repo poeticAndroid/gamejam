@@ -5,7 +5,7 @@ import MapState = require("./MapState");
 /**
  * MapUtils class
  *
- * @date 14-08-2016
+ * @date 16-08-2016
  */
 
 module MapUtils {
@@ -28,7 +28,7 @@ module MapUtils {
     if (object.flipV) {
       sprite.scale.y *= -1;
     }
-    sprite.rotation = object.rotation * (Math.PI / 180);
+    sprite.angle = object.rotation;
     sprite.name = ""+object.name;
     sprite.visible = !!(object.visible);
   }

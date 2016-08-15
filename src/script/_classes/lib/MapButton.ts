@@ -8,7 +8,7 @@ import MapUtils     = require("./MapUtils");
 /**
  * MapButton class
  *
- * @date 14-08-2016
+ * @date 16-08-2016
  */
 
 class MapButton extends Phaser.Button {
@@ -21,12 +21,12 @@ class MapButton extends Phaser.Button {
 
   constructor(public mapState:MapState, public object:any) {
     super(mapState.game, object.x, object.y);
+    this.properties = MapUtils.decodeProperties(object.properties, {});
     var val:any;
     MapUtils.applyTexture(this, object);
     MapUtils.applyPosition(this, object);
     this._firstFrame = <number>this.frame;
 
-    this.properties = MapUtils.decodeProperties(object.properties, {});
     MapUtils.mergeObjects(this.properties, this);
 
     this.command = this.properties["command"];

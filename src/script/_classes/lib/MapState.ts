@@ -2,6 +2,7 @@
 "use strict";
 import GameApp     = require("../GameApp");
 import MapSprite   = require("./MapSprite");
+import MapText     = require("./MapText");
 import MapButton   = require("./MapButton");
 import joypad      = require("./joypad");
 import StorageFile = require("./StorageFile");
@@ -11,7 +12,7 @@ import MapUtils    = require("./MapUtils");
 /**
  * MapState class
  * 
- * @date 14-08-2016
+ * @date 15-08-2016
  */
 
 class MapState extends Phaser.State {
@@ -33,6 +34,7 @@ class MapState extends Phaser.State {
     this.eng = gameApp.eng;
     this.objectClasses = {
       "sprite": MapSprite,
+      "text":   MapText,
       "button": MapButton
     };
     this.loaded = false;
