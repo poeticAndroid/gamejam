@@ -1,18 +1,19 @@
 /// <reference path="../../_d.ts/phaser/phaser.d.ts"/>
 "use strict";
-import GameApp     = require("../GameApp");
-import MapSprite   = require("./MapSprite");
-import MapText     = require("./MapText");
-import MapButton   = require("./MapButton");
-import joypad      = require("./joypad");
-import StorageFile = require("./StorageFile");
-import MapUtils    = require("./MapUtils");
+import GameApp       = require("../GameApp");
+import MapSprite     = require("./MapSprite");
+import MapText       = require("./MapText");
+import MapBitmapText = require("./MapBitmapText");
+import MapButton     = require("./MapButton");
+import joypad        = require("./joypad");
+import StorageFile   = require("./StorageFile");
+import MapUtils      = require("./MapUtils");
 
 
 /**
  * MapState class
  * 
- * @date 15-08-2016
+ * @date 16-08-2016
  */
 
 class MapState extends Phaser.State {
@@ -33,9 +34,10 @@ class MapState extends Phaser.State {
     super();
     this.eng = gameApp.eng;
     this.objectClasses = {
-      "sprite": MapSprite,
-      "text":   MapText,
-      "button": MapButton
+      "sprite":      MapSprite,
+      "text":        MapText,
+      "bitmapText":  MapBitmapText,
+      "button":      MapButton
     };
     this.loaded = false;
   }
@@ -83,7 +85,7 @@ class MapState extends Phaser.State {
   };
 
   loadAssets() {
-    var layer:any, tileset:any, url:string;
+    var layer:any, tileset:any, url:string, key:string, ext:string[];
     if (!this.eng.cache.checkTilemapKey(this.mapName)) {
       return;
     }
@@ -101,6 +103,14 @@ class MapState extends Phaser.State {
     }
     if (this.properties["musicKey"] && this.properties["musicUrl"]) {
       this.gameApp.loadMusic(this.properties["musicKey"], this.mapFolder + this.properties["musicUrl"]);
+    }
+    if (this.properties["bitmapFonts"]) {
+      for (key in this.properties["bitmapFonts"]) {
+        url = this.properties["bitmapFonts"][key];
+        ext = url.substr(url.lastIndexOf(".") + 1).split("|");
+        url = url.substr(0, url.lastIndexOf(".") + 1);
+        this.eng.load.bitmapFont(key, this.mapFolder + url+ext[0], this.mapFolder + url+ext[1]);
+      }
     }
   };
 
@@ -154,7 +164,8 @@ class MapState extends Phaser.State {
         break;
         case "objectgroup":
           for (object of layer.objects) {
-            if (this._offstageMode) {
+            properties = MapUtils.decodeProperties(object.properties);
+            if (this._offstageMode && !(properties["fixedToCamera"])) {
               this.offstageObject(object, layer.name);
             } else {
               this.addObject(object, layer.name);
@@ -263,7 +274,9 @@ class MapState extends Phaser.State {
           if (this._offStageQueue[i].y < object.y) place = i;
           break;
       }
-      if (place < this._offStageQueue.length) i = this._offStageQueue.length;
+      if (place < this._offStageQueue.length) {
+        i = this._offStageQueue.length;
+      }
     }
     this._offStageQueue.splice(place, 0, object);
   }
@@ -334,7 +347,7 @@ class MapState extends Phaser.State {
     g.alpha = from;
     g.fixedToCamera = true;
     g.beginFill(0, 1);
-    g.drawRect(0, 0, this.eng.stage.width, this.eng.stage.height);
+    g.drawRect(0, 0, this.eng.width, this.eng.height);
     g.endFill();
     var t = this.eng.add.tween(g).to({alpha:to}, duration, null, true);
     t.onComplete.add(function(){

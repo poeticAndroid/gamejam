@@ -158,52 +158,6 @@
                  "y":384
                 }, 
                 {
-                 "height":16,
-                 "id":65,
-                 "name":"Settings",
-                 "properties":
-                    {
-                     "center":true,
-                     "cols":12,
-                     "scale":2,
-                     "text":"Settings"
-                    },
-                 "propertytypes":
-                    {
-                     "center":"bool",
-                     "cols":"int",
-                     "scale":"float",
-                     "text":"string"
-                    },
-                 "rotation":0,
-                 "type":"text",
-                 "visible":true,
-                 "width":16,
-                 "x":144,
-                 "y":32
-                }, 
-                {
-                 "height":16,
-                 "id":68,
-                 "name":"Back",
-                 "properties":
-                    {
-                     "scale":0.5,
-                     "text":"Back"
-                    },
-                 "propertytypes":
-                    {
-                     "scale":"float",
-                     "text":"string"
-                    },
-                 "rotation":0,
-                 "type":"text",
-                 "visible":true,
-                 "width":16,
-                 "x":368,
-                 "y":344
-                }, 
-                {
                  "gid":8,
                  "height":32,
                  "id":74,
@@ -242,6 +196,58 @@
                  "width":32,
                  "x":176,
                  "y":192
+                }, 
+                {
+                 "height":32,
+                 "id":81,
+                 "name":"Settings",
+                 "properties":
+                    {
+                     "align":"center",
+                     "font":"nokia",
+                     "fontSize":64,
+                     "stretched":false,
+                     "tint":0
+                    },
+                 "propertytypes":
+                    {
+                     "align":"string",
+                     "font":"string",
+                     "fontSize":"int",
+                     "stretched":"bool",
+                     "tint":"int"
+                    },
+                 "rotation":0,
+                 "type":"bitmapText",
+                 "visible":true,
+                 "width":736,
+                 "x":32,
+                 "y":32
+                }, 
+                {
+                 "height":16,
+                 "id":82,
+                 "name":"Back",
+                 "properties":
+                    {
+                     "anchor":"{\"set\":0.5}",
+                     "font":"nokia",
+                     "stretched":false,
+                     "tint":0
+                    },
+                 "propertytypes":
+                    {
+                     "anchor":"string",
+                     "font":"string",
+                     "stretched":"bool",
+                     "tint":"int"
+                    },
+                 "rotation":0,
+                 "type":"bitmapText",
+                 "visible":true,
+                 "width":16,
+                 "x":400,
+                 "y":352
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -250,7 +256,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":81,
+ "nextobjectid":83,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,

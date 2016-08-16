@@ -13,17 +13,6 @@
          "y":0
         }, 
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         "height":17,
-         "name":"tiles",
-         "opacity":1,
-         "type":"tilelayer",
-         "visible":true,
-         "width":30,
-         "x":0,
-         "y":0
-        }, 
-        {
          "draworder":"index",
          "height":14,
          "name":"objects",
@@ -50,7 +39,7 @@
                  "visible":true,
                  "width":192,
                  "x":736,
-                 "y":320
+                 "y":384
                 }, 
                 {
                  "gid":6,
@@ -74,111 +63,86 @@
                  "visible":true,
                  "width":192,
                  "x":736,
-                 "y":224
+                 "y":288
                 }, 
                 {
-                 "height":128,
-                 "id":85,
-                 "name":"title",
+                 "height":32,
+                 "id":83,
+                 "name":"Polar Bears..?",
                  "properties":
                     {
                      "align":"center",
-                     "boundsAlignH":"center",
-                     "boundsAlignV":"middle",
-                     "fill":"yellow",
-                     "fontSize":"80px",
-                     "setShadow":"[0, 0, \"rgba(0,0,0,0.5)\", 10]",
-                     "stroke":"blue",
-                     "strokeThickness":5,
-                     "text":"Polar bears..?"
+                     "font":"nokia",
+                     "fontSize":128,
+                     "stretched":false,
+                     "tint":0
                     },
                  "propertytypes":
                     {
                      "align":"string",
-                     "boundsAlignH":"string",
-                     "boundsAlignV":"string",
-                     "fill":"string",
-                     "fontSize":"string",
-                     "setShadow":"string",
-                     "stroke":"string",
-                     "strokeThickness":"int",
-                     "text":"string"
+                     "font":"string",
+                     "fontSize":"int",
+                     "stretched":"bool",
+                     "tint":"int"
                     },
                  "rotation":0,
-                 "type":"text",
+                 "type":"bitmapText",
                  "visible":true,
-                 "width":704,
+                 "width":896,
                  "x":32,
                  "y":32
                 }, 
                 {
-                 "height":56,
-                 "id":83,
-                 "name":"Play",
-                 "properties":
-                    {
-                     "boundsAlignH":"center",
-                     "boundsAlignV":"middle",
-                     "stretched":true,
-                     "text":"Play"
-                    },
-                 "propertytypes":
-                    {
-                     "boundsAlignH":"string",
-                     "boundsAlignV":"string",
-                     "stretched":"bool",
-                     "text":"string"
-                    },
-                 "rotation":9.99288961053374,
-                 "type":"text",
-                 "visible":true,
-                 "width":192,
-                 "x":742.315114604122,
-                 "y":151.766287387014
-                }, 
-                {
-                 "height":56,
-                 "id":84,
+                 "height":16,
+                 "id":120,
                  "name":"Settings",
                  "properties":
                     {
-                     "boundsAlignH":"center",
-                     "boundsAlignV":"middle",
-                     "text":"Settings and stuff"
+                     "anchor":"{\"set\":0.5}",
+                     "font":"nokia",
+                     "stretched":false,
+                     "tint":0
                     },
                  "propertytypes":
                     {
-                     "boundsAlignH":"string",
-                     "boundsAlignV":"string",
-                     "text":"string"
+                     "anchor":"string",
+                     "font":"string",
+                     "stretched":"bool",
+                     "tint":"int"
                     },
                  "rotation":0,
-                 "type":"text",
+                 "type":"bitmapText",
                  "visible":true,
-                 "width":192,
-                 "x":736,
-                 "y":264
+                 "width":16,
+                 "x":832,
+                 "y":352
                 }, 
                 {
-                 "height":56,
-                 "id":117,
-                 "name":"instructs",
+                 "height":16,
+                 "id":121,
+                 "name":"Play",
                  "properties":
                     {
-                     "instructions":"{\n\"keyboard\": \"Use arrow keys to move.\",\n\"touch\": \"Swipe with thumb to move.\",\n\"gamepad\": \"Use left stick to move.\"\n}",
-                     "text":"Use keyboard, touch or gamepad."
+                     "anchor":"{\"set\":0.5}",
+                     "font":"nokia",
+                     "fontSize":48,
+                     "stretched":false,
+                     "tint":0
                     },
                  "propertytypes":
                     {
-                     "instructions":"string",
-                     "text":"string"
+                     "anchor":"string",
+                     "font":"string",
+                     "fontSize":"int",
+                     "stretched":"bool",
+                     "tint":"int"
                     },
-                 "rotation":-64.5960922806253,
-                 "type":"text",
+                 "rotation":0,
+                 "type":"bitmapText",
                  "visible":true,
-                 "width":264,
-                 "x":464,
-                 "y":424
+                 "width":16,
+                 "x":832,
+                 "y":256
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -187,16 +151,18 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":120,
+ "nextobjectid":122,
  "orientation":"orthogonal",
  "properties":
     {
+     "bitmapFonts":"{\"nokia\":\"..\/fonts\/nokia.png|xml\"}",
      "musicKey":"Twentyone",
      "musicLoop":true,
      "musicUrl":"..\/music\/AuditoryCheesecake_Twentyone.mp3"
     },
  "propertytypes":
     {
+     "bitmapFonts":"string",
      "musicKey":"string",
      "musicLoop":"bool",
      "musicUrl":"file"

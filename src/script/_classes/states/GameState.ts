@@ -3,7 +3,6 @@
 import GameApp       = require("../GameApp");
 import MapState      = require("../lib/MapState");
 import MapSprite     = require("../lib/MapSprite");
-import Text          = require("../sprites/Text");
 
 import Recorder      = require("../lib/Recorder");
 
@@ -28,7 +27,6 @@ class GameState extends MapState {
     this.eng.antialias = false;
     this.objectClasses["protagonist"] = Protagonist;
     this.objectClasses["grunt"] = Grunt;
-    this.objectClasses["8bitText"] = Text;
     this.objectClasses["patrol"] = Patrol;
     this.objectClasses["powerup"] = Powerup;
     this.joypad.mode = "legacy";
@@ -59,7 +57,7 @@ class GameState extends MapState {
 
       this._restarting = 0;
 
-      // Time
+      /* // Time
       this._timeText = this.eng.add.text(10,10,this._timeInRoom.toString(), {fill: "white"});
       this._timeText.fixedToCamera = true;
 
@@ -69,7 +67,13 @@ class GameState extends MapState {
 
       // Ghost amount
       this._ghostText = this.eng.add.text(10,58,this._timeInRoom.toString(), {fill: "white"});
-      this._ghostText.fixedToCamera = true;
+      this._ghostText.fixedToCamera = true; */
+      
+      // Update ghost text
+      this.objectType("bitmapText").getByName("Deaths").text = "Deaths: " + (this.gameApp.recorder.getGhostAmount()).toString();
+
+      // Update best time
+      this.objectType("bitmapText").getByName("Best time").text = "Best time: "+this.gameApp.saveFile.get("bestTime");
 
 
       // Set recorder index to 0
@@ -138,10 +142,6 @@ class GameState extends MapState {
       // Update time related variables
       this.timeRelatedStuff()
 
-      // Update ghost text
-      this._ghostText.text = "Deaths: " + (this.gameApp.recorder.getGhostAmount() - 1).toString();
-
-
       // Debugging
       this.gameApp.recorder.update();
  /*     if(this.joypad.a == true && this.joypad.deltaA && this.objectType("protagonist").getTop() !== undefined)
@@ -181,7 +181,7 @@ class GameState extends MapState {
   {
   //  this._timeInRoom += this.game.time.physicsElapsed;
     //this._timeText.text = "Countdown: " + parseFloat(this._timeInRoom.toString()).toFixed(1);
-    this._timeText.text = "Countdown: " + Math.floor(this.camera.y / 60);
+    this.objectType("bitmapText").getByName("countdown").text = "Countdown: " + Math.floor(this.camera.y / 60);
  
   }
 
