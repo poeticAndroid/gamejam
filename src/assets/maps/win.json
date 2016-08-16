@@ -13,45 +13,80 @@
          "y":0
         }, 
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         "height":17,
-         "name":"tiles",
-         "opacity":1,
-         "type":"tilelayer",
-         "visible":true,
-         "width":30,
-         "x":0,
-         "y":0
-        }, 
-        {
          "draworder":"index",
          "height":14,
          "name":"objects",
          "objects":[
                 {
-                 "height":16,
+                 "height":64,
                  "id":85,
                  "name":"YOU WIN, HOMBRE!",
                  "properties":
                     {
-                     "center":true,
-                     "cols":12,
-                     "scale":2,
-                     "text":"YOU WIN, HOMBRE!"
+                     "font":"nokia",
+                     "fontSize":64,
+                     "text":"YOU WIN, HOMBRE!",
+                     "tint":"0"
                     },
                  "propertytypes":
                     {
-                     "center":"bool",
-                     "cols":"int",
-                     "scale":"float",
-                     "text":"string"
+                     "font":"string",
+                     "fontSize":"int",
+                     "text":"string",
+                     "tint":"string"
                     },
                  "rotation":0,
-                 "type":"text",
+                 "type":"bitmapText",
                  "visible":true,
-                 "width":16,
-                 "x":32,
-                 "y":32
+                 "width":576,
+                 "x":16,
+                 "y":16
+                }, 
+                {
+                 "height":32,
+                 "id":115,
+                 "name":"died",
+                 "properties":
+                    {
+                     "font":"nokia",
+                     "text":"You died a few times tho..",
+                     "tint":"0"
+                    },
+                 "propertytypes":
+                    {
+                     "font":"string",
+                     "text":"string",
+                     "tint":"string"
+                    },
+                 "rotation":0,
+                 "type":"bitmapText",
+                 "visible":true,
+                 "width":576,
+                 "x":16,
+                 "y":96
+                }, 
+                {
+                 "height":32,
+                 "id":116,
+                 "name":"record",
+                 "properties":
+                    {
+                     "font":"nokia",
+                     "text":"That's a new record! :)",
+                     "tint":"0"
+                    },
+                 "propertytypes":
+                    {
+                     "font":"string",
+                     "text":"string",
+                     "tint":"string"
+                    },
+                 "rotation":0,
+                 "type":"bitmapText",
+                 "visible":true,
+                 "width":576,
+                 "x":16,
+                 "y":128
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -60,7 +95,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":115,
+ "nextobjectid":117,
  "orientation":"orthogonal",
  "properties":
     {

@@ -43,7 +43,6 @@ class GameState extends MapState {
     this.eng.load.audio("explosion2", "./assets/sounds/explosion2.wav");
     this.eng.load.audio("explosion3", "./assets/sounds/explosion3.wav");
     this.eng.load.audio("upgrade1", "./assets/sounds/upgrade.wav");
-    this.eng.load.image("font", "./assets/gfx/VictoriaBold.png");
   }
 
   create() {
@@ -121,12 +120,16 @@ class GameState extends MapState {
     }
     else if(this.mapName == "win_map")
     {
-      this._ghostText = this.eng.add.text(100,200,"You died " + (this.gameApp.recorder.getGhostAmount() - 1).toString() + " times", {fill: "black"});
+      this.objectType("bitmapText").getByName("died").text = "You died " + (this.gameApp.recorder.getGhostAmount() - 1).toString() + " times.";
+      this.objectType("bitmapText").getByName("record").visible = false;
       if (this.gameApp.saveFile.get("bestDeaths") == null || this.gameApp.saveFile.get("bestDeaths") > (this.gameApp.recorder.getGhostAmount() - 1)) {
         if (this.gameApp.saveFile.get("bestDeaths") != null) {
-          this._bestTimeText = this.eng.add.text(100,224, "That's a new record! :)", {fill: "black"});
+          this.objectType("bitmapText").getByName("record").visible = true;
         }
         this.gameApp.saveFile.set("bestDeaths", this.gameApp.recorder.getGhostAmount() - 1);
+      }
+      if (this.gameApp.saveFile.get("bestDeaths") < 1) {
+        this.gameApp.saveFile.set("bestDeaths", null);
       }
       this.gameApp.trackEvent("won_"+(this.gameApp.recorder.getGhostAmount() - 1));
     }
