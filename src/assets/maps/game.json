@@ -258,8 +258,8 @@
                  "type":"grunt",
                  "visible":true,
                  "width":64,
-                 "x":387,
-                 "y":9288
+                 "x":832,
+                 "y":9056
                 }, 
                 {
                  "gid":23,
@@ -8497,7 +8497,7 @@
          "offsety":-1,
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":25,
          "x":0,
          "y":0

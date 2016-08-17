@@ -90,7 +90,7 @@ class GameState extends MapState {
                      "type":"protagonist",
                   "visible":true,
                     "width":64,
-                        "x":400,
+                        "x":this.world.centerX,
                         "y":9500,
                         "ghostNr":i
                       };
@@ -106,7 +106,7 @@ class GameState extends MapState {
                    "type":"protagonist",
                 "visible":true,
                   "width":64,
-                      "x":400,
+                      "x":this.world.centerX,
                       "y":9500,
                       "weapon": {
                                 "name":"StndBullet"
