@@ -4,7 +4,7 @@ import joypad   = require("./_classes/lib/joypad");
 
 /**
  * main.ts
- * Main script for Shapeshift
+ * Main script
  */
 var game: GameApp,
     gameContainer: HTMLElement,

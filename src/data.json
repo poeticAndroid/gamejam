@@ -1,6 +1,5 @@
 {
   "baseUrl": "./",
-  "siteName": "codeartistic.ninja",
-  "title": "Polar bears..?",
+  "appTitle": "Polar bears..?",
   "description": "A fight against the polar bear invasion with timeloop ship!"
 }

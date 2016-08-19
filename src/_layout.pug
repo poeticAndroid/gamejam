@@ -3,6 +3,10 @@ html
   head
     meta(charset="utf-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0, user-scalable=no")
+    if(title)
+      - title += " - " + appTitle
+    else
+      - title = appTitle
     title= title
     meta(property="og:url", content=baseUrl)
     meta(property="og:title", content=title)
@@ -11,5 +15,6 @@ html
     meta(property="og:image", content=baseUrl+"images/cover.png")
     link(rel="stylesheet", type="text/css", href="style/style.css")
   body
-    .page-width!= yield
+    .page-width
+      yield
     include _piwik.html

@@ -2,6 +2,7 @@
 /*globals complete, fail, jake, namespace, task, watchTask */
 var fs          = require("fs"),
     path        = require("path"),
+    http        = require("http"),
     Watcher     = require("file-watch"),
     livereload  = require("livereload"),
     pug         = require("pug"),
@@ -84,6 +85,7 @@ task("deploy", [ "default" ], {async:true}, function(){
 });
 
 task("clean", function() {
+  http.get("http://localhost:8000/").on("error", function(){});
   console.log("\nCleaning build dir...");
   jake.mkdirP(outDir);
   var files = new jake.FileList();
@@ -93,6 +95,40 @@ task("clean", function() {
     jake.rmRf(file);
   });
   console.log("...dONE!");
+});
+
+task("rename", function(){
+  var pkg  = JSON.parse(fs.readFileSync("./package.json"));
+  var data = JSON.parse(fs.readFileSync(srcDir+"data.json"));
+  var readme = fs.readFileSync("./README.md");
+
+  const readline = require('readline');
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+  var q = [
+    function(){
+      rl.question("Name: ", q.shift());
+    },
+    function(name) {
+      pkg.name = name;
+      rl.question("Title: ", q.shift());
+    },
+    function(title) {
+      data.appTitle = title;
+      rl.question("Description: ", q.shift());
+    },
+    function(description) {
+      data.description = description;
+
+      fs.writeFileSync("./package.json", JSON.stringify(pkg, null, 2));
+      fs.writeFileSync(srcDir+"data.json", JSON.stringify(data, null, 2));
+      fs.writeFileSync("./README.md", data.appTitle+"\n===\n"+data.description+"\n"+readme);
+      process.exit(0);
+    }
+  ];
+  q.shift()();
 });
 
 namespace("html", function(){

@@ -5,6 +5,7 @@
   "scripts": {
     "deploy": "jake deploy",
     "prepublish": "jake",
+    "rename": "jake rename",
     "start": "statify -d ./build/",
     "watch": "jake watch"
   },
