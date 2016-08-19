@@ -21,10 +21,10 @@ Open your browser to http://localhost:8000/
 
 Credits
 -------
-Code by [codeartistic.ninja](http://the.codeartistic.ninja/), [Fedthund](http://www.fedthund.dk/) and friend.
+Code by [codeartistic.ninja](http://the.codeartistic.ninja/), [Fedthund](http://www.fedthund.dk) and friend.
 
-Graphics by [codeartistic.ninja](http://the.codeartistic.ninja/).
-
-8-bit font by [usr_share](http://opengameart.org/content/a-package-of-8-bit-fonts-for-grafx2-and-linux).
+Graphics by [codeartistic.ninja](http://the.codeartistic.ninja).
 
 Music by [Auditory Cheesecake](https://soundcloud.com/auditory_cheesecake).
+
+Moon background based on [photo by DonkeyHotey](https://www.flickr.com/photos/donkeyhotey/6143892887).

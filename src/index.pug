@@ -1,0 +1,28 @@
+include _phug
+include _layout
+  noscript You need to enable JavaScript in order to play this game.
+  #game
+  article.page-width
+    h1= title
+    section#description
+      h2 The world ends in 2 minutes!
+      p= description
+      :markdown-it
+        The controls are pretty simple: Use WASD/arrow keys, D-pad/analog stick or swipe to move the spaceship around..
+
+        This game was made in two days together with a couple of friends..
+    section#credits
+      :markdown-it
+        Credits
+        -------
+        Code by [codeartistic.ninja](http://the.codeartistic.ninja/), [Fedthund](http://www.fedthund.dk) and friend.
+        
+        Graphics by [codeartistic.ninja](http://the.codeartistic.ninja).
+        
+        Music by [Auditory Cheesecake](https://soundcloud.com/auditory_cheesecake).
+        
+        Moon background based on [photo by DonkeyHotey](https://www.flickr.com/photos/donkeyhotey/6143892887).
+        
+        Source on [github](https://github.com/fennesz/gamejam).
+  script(type="text/javascript", src="//cdnjs.cloudflare.com/ajax/libs/phaser/2.6.1/phaser.min.js")
+  script(type="text/javascript", src="script/main.js")

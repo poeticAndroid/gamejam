@@ -4,8 +4,7 @@ var fs          = require("fs"),
     path        = require("path"),
     Watcher     = require("file-watch"),
     livereload  = require("livereload"),
-    mustache    = require("mustache"),
-    markdown    = require("marked"),
+    pug         = require("pug"),
     htmlmin     = require("htmlmin"),
     less        = require("less"),
     cssmin      = require("cssmin"),
@@ -18,7 +17,7 @@ var fs          = require("fs"),
  * Jakefile.js
  * For building web apps
  *
- * @date 26-05-2016
+ * @date 19-08-2016
  */
 var srcDir        = "./src/",
     outDir        = "./build/",
@@ -28,12 +27,12 @@ var srcDir        = "./src/",
     reloadServer,
     watchThrottle = {};
 
-task("default", [ "clean", "html:mustache", "html:md", "css:less", "js:ts", "static:json", "static:all" ]);
+task("default", [ "clean", "html:pug", "html:md", "css:less", "js:ts", "static:json", "static:all" ]);
 
 task("watch", function(){
   console.log("\nWatching...");
   debug = true;
-  startWatching(".mustache",  "html:mustache");
+  startWatching(".pug",  "html:pug");
   startWatching(".md",        "html:md");
   startWatching(".less",      "css:less");
   startWatching(".ts",        "js:ts");
@@ -108,29 +107,27 @@ namespace("html", function(){
       };
     }
     data.pkg = require("./package.json");
-    data.php = require("./phustache.js");
     data.deploy = require("./.deploy.json");
     data.baseUrl = data.deploy.rootUrl + data.deploy.urlPath;
   } catch(e) {}
+  var pug_opts = {
+    pretty: true
+  };
   var htmlmin_opts = {
     collapseWhitespace: true
   };
 
-  task("mustache", function(){
-    console.log("\nCompiling Mustache...");
-    fileTypeList(".mustache", true).forEach(function(inFile){
-      var basename = path.basename(inFile, ".mustache");
-      console.log(inFile, "#>", basename);
-      partials[basename] = data.php.replaceVars(""+fs.readFileSync(inFile));
-    });
-    fileTypeList(".mustache").forEach(function(inFile){
+  task("pug", function(){
+    console.log("\nCompiling Pug...");
+    fileTypeList(".pug").forEach(function(inFile){
       var outFile = outputFile(inFile, ".html"),
           output  = ""+fs.readFileSync(inFile);
       console.log(inFile, "->", outFile);
 
       setActive(outFile, data);
-      output = data.php.replaceVars(output);
-      output = mustache.render(output, data, partials);
+      pug_opts.filename = inFile;
+      output = pug.compile(output, pug_opts);
+      output = output(data);
 
       if (!debug) { output = htmlmin(output, htmlmin_opts); }
       jake.mkdirP(path.dirname(outFile));
@@ -139,7 +136,7 @@ namespace("html", function(){
     console.log("...dONE!");
   });
   task("md", function(){
-    jake.Task["html:mustache"].invoke();
+    jake.Task["html:pug"].invoke();
     console.log("\nCompiling Markdown...");
     fileTypeList(".md").forEach(function(inFile){
       var outFile = outputFile(inFile, ".html"),
@@ -147,13 +144,13 @@ namespace("html", function(){
       console.log(inFile, "->", outFile);
 
       setActive(outFile, data);
-      var template = "{{> _markdown }}";
       var lines = output.trim().split("\n");
-      if (lines[lines.length-1].substr(0, 3) === "{{>")
-        template = lines.pop();
       data.title = lines[0].trim();
-      data.yield = markdown(lines.join("\n"));
-      output = mustache.render(template, data, partials);
+      pug_opts.filename = inFile;
+      output = output.replace(/\n/g, "\n    ");
+      output = "include _markdown\n  :markdown-it\n    "+output;
+      output = pug.compile(output, pug_opts);
+      output = output(data);
 
       if (!debug) { output = htmlmin(output, htmlmin_opts); }
       jake.mkdirP(path.dirname(outFile));
@@ -249,7 +246,7 @@ namespace("static", function(){
 
   task("all", function(){
     console.log("\nCopying static files...");
-    fileTypeList([".mustache", ".md", ".less", ".ts"]);
+    fileTypeList([".pug", ".md", ".less", ".ts"]);
     staticFiles.resolve();
     excludeIgnoredFiles(staticFiles.toArray()).forEach(function(inFile){
       var outFile = outputFile(inFile);

@@ -16,10 +16,10 @@
     "htmlmin": "0.0.6",
     "jake": "^8.0.12",
     "jsmin": "^1.0.1",
+    "jstransformer-markdown-it": "^0.2.3",
     "less": "^2.7.1",
     "livereload": "^0.4.1",
-    "marked": "^0.3.5",
-    "mustache": "^2.2.1",
+    "pug": "^2.0.0-beta5",
     "tsify": "^0.16.0"
   },
   "dependencies": {
