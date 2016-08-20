@@ -1,7 +1,4 @@
 Polar bears..?
-===
-A fight against the polar bear invasion with timeloop ship!
-Polar bears..?
 ==============
 The world ends in 2 minutes!
 A fight against the polar bear invasion with timeloop ship!
