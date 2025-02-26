@@ -26,6 +26,8 @@ class Powerup extends MapSprite {
     // POSITION AND VELOCITY
     this.position = object.x && object.y ? new Phaser.Point(object.x, object.y) : new Phaser.Point(0,0);
     this.body.velocity = new Phaser.Point(0,0);
+
+    this.sfx = this.mapState.add.audio('upgrade1');
   }
 
   destroyGibEmitter() {
@@ -46,6 +48,7 @@ class Powerup extends MapSprite {
     this._emitter.start(true, this._gibTTL,null,Math.floor(Math.random()*100) + 50);
     this.visible = false;
     this.mapState.time.events.add(this._gibTTL, ()=>{this.destroyGibEmitter();}, this);
+    this.playSound();
   }
 
 }

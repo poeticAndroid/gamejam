@@ -260,8 +260,6 @@ class GameState extends MapState {
 
   _ProtagonistMeetsPowerup(protagonist:Protagonist, powerup:Powerup) {
     powerup.gib();
-    var upgradeSound = this.add.audio("upgrade1");
-    upgradeSound.play();
     this.objectType("protagonist").getTop().upgrade(1);
   }
 
